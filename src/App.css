@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Bellefair");
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Bellefair', serif; }
+
+a {
+  text-decoration: none; }
+  a:visited {
+    color: white; }
+
+p {
+  font-size: 16px; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+.main-header {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 15px 0; }
+  .main-header li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 10px; }
+
+.home-page {
+  text-align: center;
+  background: #333;
+  background: url("./texture2.jpg") center;
+  background-size: cover;
+  height: 100vh; }
+
+.home-logo {
+  width: 50vw; }
+
+.black-button {
+  background: url("./buttonbacker.png") bottom center;
+  background-size: cover;
+  height: 57px;
+  width: 240px;
+  color: white;
+  border: none;
+  display: block;
+  margin: 20px auto;
+  font-size: 16px;
+  text-decoration-style: none;
+  font-family: 'Bellefair', serif; }
+
+.story-intro {
+  width: 100vw;
+  background: #020806;
+  color: white; }
+
+.story-body, .story-rules {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  text-align: center; }
+  .story-body img, .story-rules img {
+    max-width: 100%; }
