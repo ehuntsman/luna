@@ -13,7 +13,7 @@ app.use( bodyParser.json() );
 app.use( cors() );
 
 app.use(session({
-    secret: 'theCake15aL13'
+    secret: config.sessionsecret
 }))
 app.use(passport.initialize());
 app.use(passport.session());
