@@ -13,7 +13,7 @@ app.use( bodyParser.json() );
 app.use( cors() );
 
 app.use(session({
-    secret: config.sessionsecret
+    secret: config.sessionSecret
 }))
 app.use(passport.initialize());
 app.use(passport.session());
