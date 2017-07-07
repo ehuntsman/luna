@@ -10,6 +10,7 @@ class Navi extends Component {
                     <ul>
                         <Link to="/"><li>home</li></Link>
                         <Link to="/myteam"><li>my team</li></Link>
+                        <Link to="/storymap"><li>story map</li></Link>
                     </ul>
                 </nav>
             </div>

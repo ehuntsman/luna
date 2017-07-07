@@ -11,6 +11,9 @@ class Home extends Component {
                     <button className="black-button">Start a New Quest</button>
                 </Link>
                 <button className="black-button">Log In</button>
+                <p>or</p>
+                {/*if signed in*/}
+                <button className="black-button">Continue</button>
             </div>
         );
     }
