@@ -11,6 +11,7 @@ class Navi extends Component {
                         <Link to="/"><li>home</li></Link>
                         <Link to="/myteam"><li>my team</li></Link>
                         <Link to="/storymap"><li>story map</li></Link>
+                        <a href="http://localhost:3000/auth"><li>log in</li></a>
                     </ul>
                 </nav>
             </div>

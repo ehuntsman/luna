@@ -1,37 +1,31 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+
 class CurrentTeam extends Component {
     constructor(props){
         super(props);
         this.state = {
-            currentTeam: [],
-            teamMemOne: "",
-            teamMemTwo: "",
-            teamMemThree: "",
-            teamMemFour: "",
-            teamMemFive: "",
+            currentTeam: []
         }
     }
     render() {
         return (
-            <div>
-                <h1>current team</h1>
-                <div className="member">
-                    team member 1 - if you click me, then a character below, I will be replaced by the character below
-                </div>
-                <div className="member">
-                    team member 2
-                </div>
-                <div className="member">
-                    team member 3
-                </div>
-                <div className="member">
-                    team member 4
-                </div>
-                <div className="member">
-                    team member 5
-                </div>
+            <div className="current-team-container">
+                {this.props.characters.map( (char) => {
+                    return(
+                        <div className="member" key={char.id}>
+                            <img src={char.imageurl} placeholder={char.name} alt={char.name} />
+                            <h4>{char.name}</h4>
+                            <div className="level-element">
+                                <div className="level">
+                                    <p>{char.level}</p>
+                                </div>
+                                <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${char.elementname}.png`} alt="element"/>
+                            </div>
+                        </div>
+                    )
+                })}
                 <p>this component should be used anytime your current team comes up in game</p>
             </div>
         );
@@ -40,9 +34,9 @@ class CurrentTeam extends Component {
 
 function mapStateToProps(state){
     return{
-        name: state.teamName,
-        characters: state.team,
-        story: state.storyPoint
+        name: state.reducer.teamName,
+        characters: state.reducer.team,
+        story: state.reducer.storyPoint
     }
 }
 
