@@ -136,7 +136,7 @@ export function updateTeamName(name){
 }
 
 export function getCharacters(){
-    const url = "http://localhost:3000/api/characters"
+    const url = "/api/characters"
     const promise = axios.get(url).then(response => response.data);
     return {
         type: GET_CHARACTERS,
@@ -145,7 +145,7 @@ export function getCharacters(){
 }
 
 export function getOneCharacter(id){
-    const url = `http://localhost:3000/api/characters/${id}`
+    const url = `/api/characters/${id}`
     const promise = axios.get(url).then(response => response.data);
     return {
         type: GET_ONE_CHARACTER,

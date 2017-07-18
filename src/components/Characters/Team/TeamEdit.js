@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import CurrentTeam from './CurrentTeam';
 import CharacterList from './CharacterList';
+import axios from 'axios';
 
 import {updateTeamName} from '../../../ducks/reducer';
 import {getUserInfo} from '../../../ducks/user';
+import Test from './../../Test';
 
 class TeamEdit extends Component {
     constructor(props){
@@ -49,12 +51,21 @@ class TeamEdit extends Component {
             })
         }
     }
+
+    getUser() {
+        axios.get('/api/myteam').then( res => {
+            console.log(res)
+        })
+    }
     render() {
         console.log(this.props, "logged in");
         if(this.props.loggedIn){
             return (
                 <div className="edit-team-container">
-                    <p>logged {this.state.user.username}</p>
+                    
+                    <p>logged {this.props.loggedIn.username}
+                        <button onClick={() => this.getUser()}></button>
+                    </p>
                     <h1>{this.props.name}</h1>
                     <input type="text" onChange={this.handleChange} placeholder="change your teamname" value={this.state.userInput}/>
                     <button onClick={()=>this.updateTeamName(this.state.userInput)}>submit new team name</button>
@@ -68,16 +79,13 @@ class TeamEdit extends Component {
             return(
                 <div className="edit-team-container">
 
-                    <p>not logged</p>
+                    <p>not logged
+                        <button onClick={() => this.getUser()}></button>
+                    </p>
+                    <Test />
 
                     <h1>Log in to create and customize your team</h1>
                     <CurrentTeam/>
-                    <hr/>
-                    <p> temp list for what logged in sees</p>
-                    <h1>{this.props.name}</h1>
-                    <input type="text" onChange={this.handleChange} placeholder="change your teamname" value={this.state.userInput}/>
-                    <button onClick={()=>this.updateTeamName(this.state.userInput)}>submit new team name</button>
-                    <CharacterList/>
                 </div>
             );
         }

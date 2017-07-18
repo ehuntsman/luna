@@ -2,15 +2,11 @@
   "name": "luna",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
-    "^/api/*": {
-      "target": "http://localhost:3000",
-      "secure": false
-    }
-  },
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.3",
     "express-session": "^1.15.3",
     "jquery": "^3.2.1",

@@ -141,6 +141,12 @@ button {
   .story-body img, .story-rules img {
     max-width: 100%; }
 
+.storyMap {
+  background: #e2e2e2;
+  height: 100vh;
+  padding-top: 50px;
+  text-align: center; }
+
 .edit-team-container {
   text-align: center;
   background: #9377A5;
