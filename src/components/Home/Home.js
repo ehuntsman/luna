@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './lunaquest.png';
+import logo from './logo-01.png';
 import cloud from './cloud.png';
 import {Link} from 'react-router-dom';
 

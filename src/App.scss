@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=IM+Fell+French+Canon');
+@import url('https://fonts.googleapis.com/css?family=Meddon|Metamorphous');
 
 // /////////////////////////////////////////////////////////////////
 // Base
@@ -90,21 +91,20 @@
   .home-page {
     text-align: center;
     background: $darkgrey;
-    background: url('./components/Characters/CharacterList/background.png') no-repeat;
+    background: url('./components/Home/worlds.png') no-repeat;
     background-size: cover;
     height: 100vh;
   }
 
   .home-logo {
-    width: 50vw;
-    max-width: 635px;
+    max-height: 45vh;
   }
 
   .home-container {
     position: relative;
     z-index: 2;
     position: absolute;
-    top: 20vh;
+    top: 10vh;
     left: 25vw;
     right: 25vw;
     .home-links {
@@ -194,6 +194,29 @@
     color: white;
   }
 
+  .story-intro-hero {
+    -webkit-clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
+    clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
+    background: url('./components/Story/otherworldsheader.jpg') no-repeat;  
+    background-position: bottom;
+    height: 50vh;
+    padding-top: 10vh;  
+  }
+
+  .otherworldstitle {
+    width: 50vw;
+    // left: 0;
+    margin-left: auto;
+    .there-these {
+      font-family: 'Meddon', cursive;
+    }
+
+    .other-worlds{
+      font-family: 'Metamorphous', cursive;
+    }
+  }
+
+
   .story-body, .story-rules {
     margin-left: auto;
     margin-right: auto;
@@ -280,7 +303,7 @@
     text-align: center;
     padding: 30px;
     color: white;
-    background: url('./components/Characters/CharacterList/background.png') no-repeat;
+    background: url('./components/Story/blurback.png') no-repeat;
     height: 100vh;
     background-size: cover;
     background-position: center;

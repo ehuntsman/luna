@@ -2,63 +2,16 @@ import axios from 'axios';
 
 const initialState = {
     teamName: "My Team Name",
-    team: [
-        {
-            id: 2,
-            name: "Dipper Pines",
-            imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/dipper.png",
-            specialattackid: 2,
-            elementid: 10,
-            level: 1,
-            health: 100,
-            elementname: "ghost"
-        },
-        {
-            id: 6,
-            name: "Leota",
-            imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/leota.png",
-            specialattackid: 2,
-            elementid: 7,
-            level: 1,
-            health: 100,
-            elementname: "moon"
-        },
-        {
-            id: 8,
-            name: "Marco Dias",
-            imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/marco.png",
-            specialattackid: 2,
-            elementid: 2,
-            level: 1,
-            health: 100,
-            elementname: "fire"
-        },
-        {
-            id: 9,
-            name: "Garnet",
-            imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/garnet.png",
-            specialattackid: 2,
-            elementid: 9,
-            level: 1,
-            health: 100,
-            elementname: "psychic"
-        },
-        {
-            id: 10,
-            name: "Rose Tyler",
-            imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/rosetyler.png",
-            specialattackid: 2,
-            elementid: 2,
-            level: 1,
-            health: 100,
-            elementname: "time"
-        }
-        ],
+    currentTeamOne: 2,
+    currentTeamTwo: 6,
+    currentTeamThree: 8,
+    currentTeamFour: 9,
+    currentTeamFive: 10,
     storyPoint: 0,
     characters: [{name: "Mabel Pines", level: 2}],
     loading: false,
     error: false,
-    selectedChar: {},
+    selectedChar: {}
 }
 
 const GET_CHARACTERS = "GET_CHARACTERS";
@@ -73,51 +26,15 @@ export default function reducer(state=initialState, action){
         case UPDATE_NAME:
             return Object.assign({}, state, {teamName: action.payload})
         case GET_CHARACTERS + "_PENDING":
-            return{
-                error: false,
-                loading: true,
-                characters: state.characters,
-                teamName: state.teamName,
-                team: state.team,
-                storyPoint: state.storyPoint,
-                loggedIn: state.loggedIn,
-                selectedChar: state.selectedChar
-            }
+            return Object.assign({}, state, {loading: true, error: false})
         case GET_CHARACTERS + "_REJECTED":
-            return{
-                error: true,
-                loading: false,
-                characters: state.characters,
-                teamName: state.teamName,
-                team: state.team,
-                storyPoint: state.storyPoint,
-                loggedIn: state.loggedIn,
-                selectedChar: state.selectedChar
-            }
+            return Object.assign({}, state, {loading: false, error: true})
         case GET_CHARACTERS + "_FULFILLED":
             return Object.assign({}, state, {characters: action.payload})
         case GET_ONE_CHARACTER + "_PENDING":
-            return{
-                error: false,
-                loading: true,
-                characters: state.characters,
-                teamName: state.teamName,
-                team: state.team,
-                storyPoint: state.storyPoint,
-                loggedIn: state.loggedIn,
-                selectedChar: state.selectedChar
-            }
+            return Object.assign({}, state, {loading: true, error: false})
         case GET_ONE_CHARACTER + "_REJECTED":
-            return{
-                error: true,
-                loading: false,
-                characters: state.characters,
-                teamName: state.teamName,
-                team: state.team,
-                storyPoint: state.storyPoint,
-                loggedIn: state.loggedIn,
-                selectedChar: state.selectedChar
-            }
+            return Object.assign({}, state, {loading: false, error: true})
         case GET_ONE_CHARACTER + "_FULFILLED":
             return Object.assign({}, state, {selectedChar: action.payload})
         case GET_USER_PENDING:

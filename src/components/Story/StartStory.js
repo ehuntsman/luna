@@ -8,8 +8,15 @@ class StartStory extends Component {
         return (
             <div className="story-intro">
                 <div className="story-body">
-                    <img src={header} alt="there are other worlds than these"/>
-                    <h1>There are other worlds than these....</h1>
+                    <div className="story-intro-hero">
+                        {/*<img src={header} alt="there are other worlds than these"/>*/}
+                        <div className="otherworldstitle">
+                            <h2 className="there-these">There are</h2>
+                            <h1 className="other-worlds">Other Worlds</h1>
+                            <h2 className="there-these">than these.</h2>
+                        </div>
+                    </div>
+
                     <h3>...and they are starting to collide.</h3>
                     <p>Only the fabled Crystal from Luna can stop the universes from folding in on eachother.</p>
                     <p>Many are after the Luna and it's power.</p>
@@ -32,9 +39,9 @@ class StartStory extends Component {
                     <h1>Dying to play?</h1>
                     <h3>We highly suggest you create an account so you can save your team and create new team members</h3>
                     <p>You can play without it if you must</p>
-                    <button>Create an account to save your team</button>
+                    <a href="http://localhost:3000/auth"><button>Log in to save your team</button></a>
                     <Link to="/myteam">
-                        <button>Whatever. Let me make my team!</button>
+                        <button>Whatever. Give me a team to play with!</button>
                     </Link>
                 </div>
             </div>

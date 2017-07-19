@@ -20,30 +20,13 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next)=>{
-    console.log("-------------------")
-    console.log(req.url);
-    console.log('cookies', req.cookies['connect.sid']);
-    console.log('sessionId', req.session.id);
-    next();
-})
 app.use(cors());
-app.use((req, res,next)=>{
-    console.log('cookies', req.cookies['connect.sid']);
-    console.log('sessionId', req.session.id);
-    console.log("-------------------")
-    next();
-    
-})
+
 // app.use(express.static(__dirname + '/../build'));
 
 massive(config.connectionString).then((dbInstance) => {
     app.set('db', dbInstance);
-
-    dbInstance.set_schema()
-        .then(() => console.log('reset tables'))
-        .catch((err) => console.log('not working', err));
-
+    
     passport.use(new Auth0Strategy({
         domain: config.domain,
         clientID: config.clientID,
@@ -53,7 +36,6 @@ massive(config.connectionString).then((dbInstance) => {
         
         dbInstance.getUserByAuthId([profile.identities[0].user_id]).then((user) => {
             if (user[0]) {
-                console.log("WORKS", user[0]);
                 return done(null, user[0]);
             } else {
                 dbInstance.create_user(profile.identities[0].user_id, profile.displayName).then((err, user) => {
@@ -73,22 +55,13 @@ massive(config.connectionString).then((dbInstance) => {
     }));
 
     passport.serializeUser(function (user, done) {
-        console.log('serializing', user);
         done(null, user);
     });
 
     passport.deserializeUser(function (user, done) {
-        console.log('de-serializing', user);
         done(null, user);
     });
 
-    // app.get('/myteam', function(req,res){
-    //     if(!req.user){
-    //         return res.status(200).send(null);
-    //     }
-    //     console.log(req.user, "this is the req user in myteam");
-    //     res.status(200).send(req.user);
-    // });
     const userCtrl = require('./controllers/users_controller')
     app.get('/api/myteam', userCtrl.me)
     
@@ -101,7 +74,7 @@ massive(config.connectionString).then((dbInstance) => {
 
     app.get('/auth/logout', function (req, res) {
         req.logout();
-        res.redirect('/');
+        res.redirect('http://localhost:3001/');
     })
 })
 
