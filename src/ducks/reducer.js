@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as userlogin from './userService';
 
 const initialState = {
     teamName: "My Team Name",
@@ -6,13 +7,17 @@ const initialState = {
     characters: [{name: "Mabel Pines", level: 2}],
     loading: false,
     error: false,
-    selectedChar: {}
+    selectedChar: {},
+    loggedIn: {}
 }
 
 const GET_CHARACTERS = "GET_CHARACTERS";
 const GET_ONE_CHARACTER = "GET_ONE_CHARACTER";
 const UPDATE_NAME = 'UPDATE_NAME';
 const SELECTED_CHAR = "SELECTED_CHAR";
+const SWITCH_CHARACTERS = "SWITCH_CHARACTERS";
+
+const GET_USER = 'GET_USER';
 
 export default function reducer(state=initialState, action){
     switch(action.type){
@@ -32,6 +37,12 @@ export default function reducer(state=initialState, action){
             return Object.assign({}, state, {selectedChar: action.payload})
         case SELECTED_CHAR:
             return Object.assign({}, state, {selectedChar: action.payload})
+        case GET_USER + "_PENDING":
+            return Object.assign({}, state, {loading: true})
+        case GET_USER + "_FULFILLED":
+            return Object.assign({}, state, {loading: false, loggedIn: action.payload})
+        case SWITCH_CHARACTERS:
+            return Object.assign({}, state, {loggedIn: action.payload})
         default: return state;
     }
 }
@@ -61,53 +72,26 @@ export function getOneCharacter(id){
     }
 }
 
-export function selectedOne(id){
+export function selectedOne(char){
     return {
         type: SELECTED_CHAR,
-        payload: id
+        payload: char
     }
 }
 
-// export function loggedInAreWe(){
-//     const url = "http://localhost:3000/myteam"
-//     const promise = axios.get(url).then(response => response.data);
-//     console.log(promise, 'this is my promisejlkfhkfdhkj');
-//     return {
-//         type: LOGGED_IN_AS,
-//         payload: promise
-//     }
-// }
+export function getUserInfo() {
+  return {
+    type: GET_USER,
+    payload: userlogin.getUserInfo()
+  }
+}
 
-// export const getUserInfo = function(){
-//     return axios.get("http://localhost:3000/myteam")
-//     .then(res => {
-//         console.log(res.data);
-//         return res.data[0]
-//     })
-// }
-
-// export function reducer(state = initialState, action) {
-//   switch(action.type) {
-//     case GET_USER_PENDING:
-//       return Object.assign({}, state, {loading: true})
-
-//     case GET_USER_FULFILLED:
-//       return Object.assign({}, state, {loading: false, userData: action.payload})
-
-//     default:
-//       return state
-//   }
-// }
-// export function getUserInfo() {
-//   return {
-//     type: GET_USER,
-//     payload: userlogin.getUserInfo()
-//   }
-// }
-// app.get('/myteam', function(req,res){
-//         if(!req.user){
-//             return res.status(200).send(null);
-//         }
-//         console.log(req.user, "this is the req user in myteam");
-//         res.status(200).send(req.user);
-//     });
+export function updateCurrentTeam(joinus, indexnum, user){
+    let newteam = user.currentteam;
+    newteam.splice(indexnum, 1, joinus)
+    console.log(newteam, "this is the going away one");
+    return {
+        type: SWITCH_CHARACTERS,
+        payload: newteam
+    }
+}

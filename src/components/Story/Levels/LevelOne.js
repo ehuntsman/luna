@@ -161,8 +161,8 @@ class LevelOne extends Component {
 
 function mapStateToProps(state){
     return{
-        teamName: state.reducer.teamName,
-        teamMembers: state.reducer.team,
+        teamName: state.teamName,
+        teamMembers: state.team,
     }
 }
 

@@ -1,18 +1,13 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import promiseMiddleware from "redux-promise-middleware";
 import reducer from './reducer';
-import userReducer from './user';
-import {batchActions, enableBatching} from 'redux-batched-actions';
+
+export default createStore(reducer, applyMiddleware(promiseMiddleware()));
 
 
-const finalreducer = combineReducers({
-    reducer: reducer,
-    userLoginReducer: userReducer
-})
 
-export default createStore(
-    enableBatching(finalreducer),
-    applyMiddleware(
-        promiseMiddleware()
-    )
-);
+// import {createStore, applyMiddleware, combineReducers} from 'redux';
+// import thunk from "redux-thunk";
+// import reducer from './reducer';
+
+// export default createStore(reducer, applyMiddleware(thunk));

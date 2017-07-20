@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import CurrentTeam from './CurrentTeam';
 import CharacterList from './CharacterList';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
-import { batchActions } from 'redux-batched-actions';
 
-import {updateTeamName, getCharacters} from '../../../ducks/reducer';
-import {getUserInfo} from '../../../ducks/user';
-import Test from './../../Test';
+import {updateTeamName, getCharacters, getUserInfo} from '../../../ducks/reducer';
 
 class TeamEdit extends Component {
     constructor(props){
@@ -30,18 +26,8 @@ class TeamEdit extends Component {
         this.props.updateTeamName(name);
     }
     componentDidMount() {
-        batchActions([
-            this.props.getUserInfo(),
-            this.props.getCharacters(),
-        ])
-
-
-    }
-
-    getUser() {
-        axios.get('/api/myteam').then( res => {
-            console.log(res)
-        })
+        this.props.getCharacters()
+        this.props.getUserInfo();
     }
     render() {
         if(this.props.loggedIn.username){
@@ -51,7 +37,7 @@ class TeamEdit extends Component {
                     <h1>{this.props.name}</h1>
                     <input type="text" onChange={this.handleChange} placeholder="change your teamname" value={this.state.userInput}/>
                     <button onClick={()=>this.updateTeamName(this.state.userInput)}>submit new team name</button>
-                    <CurrentTeam user={this.props.loggedIn} characters={this.props.characters}/>
+                    <CurrentTeam characters={this.props.characters} user={this.props.loggedIn} selectedChar={this.props.selectedChar}/>
                     <div className="button-container">
                         <Link to="/storymap"><button>Let's go fight!</button></Link>
                     </div>
@@ -70,6 +56,10 @@ class TeamEdit extends Component {
                         <Link to="/storymap"><button>Let's go fight!</button></Link>
                     </div>
                     <hr/>
+                    <hr/>
+                    <hr/>
+                    <hr/>
+                    not logged in shouldn't be here'
                     <CharacterList characters={this.props.characters}/>
                 </div>
             );
@@ -79,12 +69,12 @@ class TeamEdit extends Component {
 
 function mapStateToProps(state){
     return{
-        name: state.reducer.teamName,
-        story: state.reducer.storyPoint,
-        characters: state.reducer.characters,
-        loggedIn: state.userLoginReducer.loggedIn,
-        selectedChar: state.reducer.selectedChar
+        name: state.teamName,
+        story: state.storyPoint,
+        characters: state.characters,
+        loggedIn: state.loggedIn,
+        selectedChar: state.selectedChar
     }
 }
 
-export default connect(mapStateToProps, {updateTeamName, getUserInfo, getCharacters})(TeamEdit);
+export default connect(mapStateToProps, {updateTeamName, getCharacters, getUserInfo})(TeamEdit);

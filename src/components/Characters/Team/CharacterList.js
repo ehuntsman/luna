@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {getCharacters} from '../../../ducks/reducer.js';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+import {selectedOne} from '../../../ducks/reducer';
 
 class CharacterList extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            selected: {}
+        }
+        this.selectMe = this.selectMe.bind(this);
     }
-
-    selectMe(){
-
+    selectMe(char){
+        this.props.selectedOne(char)
+        this.setState({
+            selected: char
+        })
     }
     render() {
+        console.log(this.state.selected, "SELECTED!!!!!");
+        console.log(this.props.selectedChar, "SELECTED22222222222222!!!!!")
         return (
             <div className="all-characters-container">
                 <h1>character list component</h1>
@@ -24,7 +33,7 @@ class CharacterList extends Component {
                             <img src={element.imageurl} placeholder={element.name} alt={element.name} />
                             <p>{element.name}<br/>
                             <Link to={`/characters/${element.id}`}><button>profile</button></Link>
-                            <button onClick={()=>this.selectMe(element.id)}>select</button></p>
+                            <button onClick={()=>this.selectMe(element)}>select</button></p>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${element.elementname}.png`} alt="element" />
                         </div>
                     )
@@ -34,4 +43,12 @@ class CharacterList extends Component {
     }
 }
 
-export default CharacterList;
+function mapStateToProps(state){
+    return{
+        characters: state.characters,
+        loggedIn: state.loggedIn,
+        selectedChar: state.selectedChar
+    }
+}
+
+export default connect(mapStateToProps, {selectedOne})(CharacterList);

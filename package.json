@@ -22,7 +22,8 @@
     "redux": "^3.7.1",
     "redux-batched-actions": "^0.2.0",
     "redux-batched-updates": "^0.1.0",
-    "redux-promise-middleware": "^4.3.0"
+    "redux-promise-middleware": "^4.3.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "express": "^4.15.3",
