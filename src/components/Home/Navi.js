@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 class Navi extends Component {
     render() {
         let amILogged = false;
-        if(this.props.loggedIn && this.props.loggedIn.username !== "bad"){
+        if(this.props.loggedIn.username){
             amILogged = <a href="http://localhost:3000/auth/logout"><li>log out {this.props.loggedIn.username}</li></a>
         }else{
             amILogged = <a href="http://localhost:3000/auth"><li>log in</li></a>

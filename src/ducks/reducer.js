@@ -2,11 +2,6 @@ import axios from 'axios';
 
 const initialState = {
     teamName: "My Team Name",
-    currentTeamOne: 2,
-    currentTeamTwo: 6,
-    currentTeamThree: 8,
-    currentTeamFour: 9,
-    currentTeamFive: 10,
     storyPoint: 0,
     characters: [{name: "Mabel Pines", level: 2}],
     loading: false,
@@ -17,9 +12,7 @@ const initialState = {
 const GET_CHARACTERS = "GET_CHARACTERS";
 const GET_ONE_CHARACTER = "GET_ONE_CHARACTER";
 const UPDATE_NAME = 'UPDATE_NAME';
-const GET_USER = 'GET_USER';
-const GET_USER_PENDING = 'GET_USER_PENDING';
-const GET_USER_FULFILLED = 'GET_USER_FULFILLED';
+const SELECTED_CHAR = "SELECTED_CHAR";
 
 export default function reducer(state=initialState, action){
     switch(action.type){
@@ -37,10 +30,8 @@ export default function reducer(state=initialState, action){
             return Object.assign({}, state, {loading: false, error: true})
         case GET_ONE_CHARACTER + "_FULFILLED":
             return Object.assign({}, state, {selectedChar: action.payload})
-        case GET_USER_PENDING:
-            return Object.assign({}, state, {loading: true})
-        case GET_USER_FULFILLED:
-            return Object.assign({}, state, {loading: false, userData: action.payload})
+        case SELECTED_CHAR:
+            return Object.assign({}, state, {selectedChar: action.payload})
         default: return state;
     }
 }
@@ -67,6 +58,13 @@ export function getOneCharacter(id){
     return {
         type: GET_ONE_CHARACTER,
         payload: promise
+    }
+}
+
+export function selectedOne(id){
+    return {
+        type: SELECTED_CHAR,
+        payload: id
     }
 }
 

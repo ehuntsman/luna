@@ -7,8 +7,9 @@ class CharacterList extends Component {
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        this.props.getCharacters();
+
+    selectMe(){
+
     }
     render() {
         return (
@@ -23,7 +24,7 @@ class CharacterList extends Component {
                             <img src={element.imageurl} placeholder={element.name} alt={element.name} />
                             <p>{element.name}<br/>
                             <Link to={`/characters/${element.id}`}><button>profile</button></Link>
-                            <button>select</button></p>
+                            <button onClick={()=>this.selectMe(element.id)}>select</button></p>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${element.elementname}.png`} alt="element" />
                         </div>
                     )
@@ -33,10 +34,4 @@ class CharacterList extends Component {
     }
 }
 
-function mapStateToProps(state){
-    return{
-        characters: state.reducer.characters,
-        loggedIn: state.userLoginReducer.loggedIn
-    }
-}
-export default connect(mapStateToProps, {getCharacters})(CharacterList);
+export default CharacterList;
