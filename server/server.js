@@ -26,7 +26,7 @@ app.use(cors());
 
 massive(config.connectionString).then((dbInstance) => {
     app.set('db', dbInstance);
-    
+
     passport.use(new Auth0Strategy({
         domain: config.domain,
         clientID: config.clientID,
@@ -68,9 +68,29 @@ massive(config.connectionString).then((dbInstance) => {
     app.get('/api/user', function(req,res) {
         res.status(200).send(req.user)
     })
+    app.get('/api/user/:id', function(req,res) {
+        const dbInstance = req.app.get('db');
+        dbInstance.getUser(req.params.id)
+        .then( user => res.status(200).send(user) )
+        .catch( () => res.status(500).send() );
+    })
 
     app.get('/api/characters', characters_controller.getAllCharacters);
     app.get('/api/characters/:id', characters_controller.getOneCharacter);
+
+    app.put('/api/user/:id', function(req,res){
+        const dbInstance = req.app.get('db');
+        console.log(req.body.newteam, "this is the new team")
+        dbInstance.update_user([req.body.newteam, req.params.id])
+        .then( user => {
+            console.log(user, "this is the user")
+            res.status(200).send(user) 
+        })
+        .catch( (err) => {
+            console.log(err)
+            res.status(500).send(err)
+        });
+    })
 
     app.get('/auth/logout', function (req, res) {
         req.logout();

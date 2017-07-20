@@ -87,11 +87,13 @@ export function getUserInfo() {
 }
 
 export function updateCurrentTeam(joinus, indexnum, user){
-    let newteam = user.currentteam;
-    newteam.splice(indexnum, 1, joinus)
-    console.log(newteam, "this is the going away one");
+    let newteam = user.currentteam.slice(0)
+    let userObj = Object.assign({}, user)
+    newteam.splice(indexnum, 1, joinus+"")
+    userObj.currentteam = newteam
+    console.log(userObj, "this is the going away one");
     return {
         type: SWITCH_CHARACTERS,
-        payload: newteam
+        payload: userObj
     }
 }
