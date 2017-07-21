@@ -19,8 +19,6 @@ class CharacterList extends Component {
         })
     }
     render() {
-        console.log(this.state.selected, "SELECTED!!!!!");
-        console.log(this.props.selectedChar, "SELECTED22222222222222!!!!!")
         return (
             <div className="all-characters-container">
                 <h1>character list component</h1>

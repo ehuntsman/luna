@@ -8,6 +8,7 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const config = require('./secrets.js');
 const characters_controller = require('./controllers/characters_controller');
+const users_controller = require('./controllers/users_controller');
 const cookieParser = require('cookie-parser');
 
 const app = module.exports = express();
@@ -62,35 +63,16 @@ massive(config.connectionString).then((dbInstance) => {
         done(null, user);
     });
 
-    const userCtrl = require('./controllers/users_controller')
-    app.get('/api/myteam', userCtrl.me)
+    app.get('/api/loggeduser', users_controller.me)
     
-    app.get('/api/user', function(req,res) {
-        res.status(200).send(req.user)
-    })
-    app.get('/api/user/:id', function(req,res) {
-        const dbInstance = req.app.get('db');
-        dbInstance.getUser(req.params.id)
-        .then( user => res.status(200).send(user) )
-        .catch( () => res.status(500).send() );
-    })
+    app.get('/api/users', users_controller.getAll)
+
+    app.get('/api/user/:id', users_controller.getOneUser)
 
     app.get('/api/characters', characters_controller.getAllCharacters);
     app.get('/api/characters/:id', characters_controller.getOneCharacter);
 
-    app.put('/api/user/:id', function(req,res){
-        const dbInstance = req.app.get('db');
-        console.log(req.body.newteam, "this is the new team")
-        dbInstance.update_user([req.body.newteam, req.params.id])
-        .then( user => {
-            console.log(user, "this is the user")
-            res.status(200).send(user) 
-        })
-        .catch( (err) => {
-            console.log(err)
-            res.status(500).send(err)
-        });
-    })
+    app.put('/api/user/:id', users_controller.update);
 
     app.get('/auth/logout', function (req, res) {
         req.logout();

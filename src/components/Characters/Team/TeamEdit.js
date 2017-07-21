@@ -27,10 +27,10 @@ class TeamEdit extends Component {
     }
     componentDidMount() {
         this.props.getCharacters()
-        this.props.getUserInfo();
+        this.props.getUserInfo()
     }
     render() {
-        if(this.props.loggedIn.username){
+        if(this.props.loggedIn && this.props.loggedIn.username){
             return (
                 <div className="edit-team-container">
                     <p>logged {this.props.loggedIn.username}</p>

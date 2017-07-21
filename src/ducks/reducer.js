@@ -1,5 +1,4 @@
 import axios from 'axios';
-import * as userlogin from './userService';
 
 const initialState = {
     teamName: "My Team Name",
@@ -80,10 +79,12 @@ export function selectedOne(char){
 }
 
 export function getUserInfo() {
-  return {
-    type: GET_USER,
-    payload: userlogin.getUserInfo()
-  }
+    const url = `/api/loggeduser`
+    const promise = axios.get(url).then(res => {return res.data});
+    return {
+        type: GET_USER,
+        payload: promise
+    }
 }
 
 export function updateCurrentTeam(joinus, indexnum, user){
@@ -91,7 +92,11 @@ export function updateCurrentTeam(joinus, indexnum, user){
     let userObj = Object.assign({}, user)
     newteam.splice(indexnum, 1, joinus+"")
     userObj.currentteam = newteam
-    console.log(userObj, "this is the going away one");
+    console.log(userObj, "this is the going in one");
+    const url = `/api/user/${user.id}`
+
+    // how does the promise get the database info of userObj and put it in req.body.newteam
+    const promise = axios.put(url, userObj.currentteam).then(response => response.data);
     return {
         type: SWITCH_CHARACTERS,
         payload: userObj

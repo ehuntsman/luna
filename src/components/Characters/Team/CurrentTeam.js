@@ -11,11 +11,12 @@ class CurrentTeam extends Component {
         this.switchEmOut = this.switchEmOut.bind(this);
     }
     switchEmOut(a,b,c){
-        console.log(a,b,c,"these are the items")
-        this.props.updateCurrentTeam(a,b,c);
+        this.props.updateCurrentTeam(a,b,c)
     }
 
 
+
+//////// display chars in order
     render() {
         let cake = "";
         if(this.props.selectedChar){
@@ -26,13 +27,14 @@ class CurrentTeam extends Component {
         if(this.props.user){
             let temparray = this.props.user.currentteam;
             let chararray = [];
-            for(var i = 0; i < this.props.characters.length; i++){
-                for(var j = 0; j < temparray.length; j++){
+            for(var j = 0; j < temparray.length; j++){
+                for(var i = 0; i < this.props.characters.length; i++){
                     if(this.props.characters[i].id == temparray[j]){
                         chararray.push(this.props.characters[i]);
                     }
                 }
             }
+            console.log(chararray, "yo yo yo this is the chararray BRO!")
             let finalarray = chararray.map( (character, i) => {
                 return (
                     <div className="member" key={i}>
@@ -62,7 +64,6 @@ class CurrentTeam extends Component {
                     }
                 }
             }
-
             let defaulty = defaultCharArray.map( (character, i) => {
                 return (
                     <div className="member">
