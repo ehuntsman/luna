@@ -297,7 +297,6 @@ button {
       width: 100%; }
     .all-characters-container .char-box img {
       width: 70px;
-      border: 2px solid #AA8677;
       display: inline-block; }
     .all-characters-container .char-box .mini-info {
       display: inline-block;
@@ -306,7 +305,6 @@ button {
     .all-characters-container .char-box .element-icon {
       width: 20px;
       height: 20px;
-      border: none;
       margin-left: 10px;
       margin: 0 5px 0 0; }
 
