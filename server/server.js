@@ -39,10 +39,8 @@ massive(config.connectionString).then((dbInstance) => {
             if (user[0]) {
                 return done(null, user[0]);
             } else {
-                dbInstance.create_user(profile.identities[0].user_id, profile.displayName).then((err, user) => {
-                    dbInstance.getUserByAuthId(profile.identities[0].user_id).then((cake) => {
-                        return done(null, cake[0]);
-                    }).catch(err=>console.log(err));
+                dbInstance.create_user(profile.identities[0].user_id, profile.displayName).then( (user) => {
+                    return done(null, user[0])
                 })
             }
         })

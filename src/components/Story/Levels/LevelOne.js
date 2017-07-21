@@ -8,25 +8,20 @@ class LevelOne extends Component {
         this.state = {
             myHealth: 100,
             badHealth: 100,
-            myTeam: [
-                {cooldown: 0, boost: 0},
-                {cooldown: 0, boost: 0},
-                {cooldown: 0, boost: 0},
-                {cooldown: 0, boost: 0},
-                {cooldown: 0, boost: 0},
-                {cooldown: 0, boost: 0},
-            ],
             badTeam: [
-                {cooldown: 0, health: 100, level: 3, boost: 0},
+                {cooldown: 0, health: 100, level: 1, boost: 0},
                 {cooldown: 0, health: 100, level: 1, boost: 0},
             ],
             selectedChar: {},
             gameOver: false
         }
+        this.handleSelection = this.handleSelection.bind(this);
+        this.attackBad = this.attackBad.bind(this);
     }
     componentDidMount(){
-        let myarr = this.props.teamMembers;
-        const myTotalHealth = myarr.reduce( (prev,next) => prev + next.health,0);
+        let myarr = this.props.loggedIn.currentteam;
+        const myTotalHealth = 500;
+        // const myTotalHealth = myarr.reduce( (prev,next) => prev + next.health,0);
         let badarr = this.state.badTeam;
         const badTotalHealth = badarr.reduce( (prev, next) => prev + next.health,0);
         this.setState({
@@ -84,77 +79,93 @@ class LevelOne extends Component {
         // this needs to render in state somehow. Maybe in level state?
 
 
-        return (
-            <div className="level-current-team">
-                <h1>level one</h1>
-                <div className="bad-team">
-                    <div>
-                        {
-                            this.state.gameOver
-                            ? 
-                            this.state.badHealth === 0 ? "YOU WIN!" : "YOU LOSE!"
-                            : null
-                        }
-                        {badChar.map( (badChar) => {
+        if(this.props.loggedIn && this.props.loggedIn.username){
+            let temparray = this.props.loggedIn.currentteam;
+            let chararray = [];
+            for(var j = 0; j < this.props.loggedIn.currentteam.length; j++){
+                for(var i = 0; i < this.props.characters.length; i++){
+                    if(this.props.characters[i].id == temparray[j]){
+                        chararray.push(this.props.characters[i]);
+                    }
+                }
+            }
+            console.log(chararray, "the chararray in storymap")
+            return (
+                <div className="level-current-team">
+                    <h1>level one</h1>
+                    <div className="bad-team">
+                        <div>
+                            {
+                                this.state.gameOver
+                                ? 
+                                this.state.badHealth === 0 ? "YOU WIN!" : "YOU LOSE!"
+                                : null
+                            }
+                            {badChar.map( (badChar) => {
+                                return(
+                                    <div className="member" key={badChar.id}>
+                                        <h4>{badChar.name}</h4>
+                                        <img src={badChar.imageurl} placeholder={badChar.name} onClick={this.state.selectedChar ? (e) => this.attackBad(badChar) : ""} />
+                                        <div className="level-element">
+                                            <div className="level">
+                                                <p>{badChar.level}</p>
+                                            </div>
+                                            <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${badChar.elementname}.png`}/>
+                                        </div>
+                                        {
+                                            this.state.selectedChar.name
+                                            ? <button onClick={(e) => this.attackBad(badChar)}>attack {badChar.name}</button>
+                                            : <div className="button-spacer"></div>
+                                        }
+                                    </div>
+                                )
+                            })}
+                            <div className="health-bar-badteam">
+                                villians healthbar {this.state.badHealth}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="ingame-instructions">
+                        <p>All health is shared on a team. To attack, click who you would like to do the attacking. Special attacks come with a cooldown, which will display how many turns is left until you can use that character again for anything (including regular attacks).</p>
+                    </div>
+
+                    <div className="health-bar-myteam">
+                        {this.props.teamName} healthbar {this.state.myHealth}
+                    </div>
+                    <div className="current-team-container">                        
+                        {chararray.map( (char) => {
                             return(
-                                <div className="member" key={badChar.id}>
-                                    <h4>{badChar.name}</h4>
-                                    <img src={badChar.imageurl} placeholder={badChar.name} onClick={this.state.selectedChar ? (e) => this.attackBad(badChar) : ""} />
+                                <div key={char.id} className={this.state.selectedChar.name === char.name ? "selected-char member" : "member"}>
+                                    <h4>{char.name}</h4>
+                                    <img src={char.imageurl} placeholder={char.name} onClick={(e) => this.handleSelection(char)} />
                                     <div className="level-element">
                                         <div className="level">
-                                            <p>{badChar.level}</p>
+                                            <p>{char.level}</p>
                                         </div>
-                                        <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${badChar.elementname}.png`}/>
+                                        <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${char.elementname}.png`}/>
                                     </div>
-                                    {
-                                        this.state.selectedChar.name
-                                        ? <button onClick={(e) => this.attackBad(badChar)}>attack {badChar.name}</button>
-                                        : <div className="button-spacer"></div>
-                                    }
+                                    <button 
+                                        onClick={(e) => this.handleSelection(char)}
+                                        className={this.state.gameOver ? "disabled-button" : null}
+                                        disabled={this.state.gameOver ? true : false}>
+                                        {this.state.selectedChar.name === char.name ? "deselect" : "attack!"}
+                                    </button>
+                                    <button className={this.state.selectedChar.name === char.name || this.state.gameOver ? "disabled-button" : null} disabled={this.state.selectedChar.name === char.name  || this.state.gameOver ? true : false}>
+                                        special attack
+                                        {/*if it's a special attack, click to see the description, then click the new button to attack*/}
+                                    </button>
                                 </div>
                             )
                         })}
-                        <div className="health-bar-badteam">
-                            villians healthbar {this.state.badHealth}
-                        </div>
                     </div>
                 </div>
-
-                <div className="ingame-instructions">
-                    <p>All health is shared on a team. To attack, click who you would like to do the attacking. Special attacks come with a cooldown, which will display how many turns is left until you can use that character again for anything (including regular attacks).</p>
-                </div>
-
-                <div className="health-bar-myteam">
-                    {this.props.teamName} healthbar {this.state.myHealth}
-                </div>
-                <div className="current-team-container">
-                    {this.props.teamMembers.map( (char) => {
-                        return(
-                            <div key={char.id} className={this.state.selectedChar.name === char.name ? "selected-char member" : "member"}>
-                                <h4>{char.name}</h4>
-                                <img src={char.imageurl} placeholder={char.name} onClick={(e) => this.handleSelection(char)} />
-                                <div className="level-element">
-                                    <div className="level">
-                                        <p>{char.level}</p>
-                                    </div>
-                                    <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${char.elementname}.png`}/>
-                                </div>
-                                <button 
-                                    onClick={(e) => this.handleSelection(char)}
-                                    className={this.state.gameOver ? "disabled-button" : null}
-                                    disabled={this.state.gameOver ? true : false}>
-                                    {this.state.selectedChar.name === char.name ? "deselect" : "attack!"}
-                                </button>
-                                <button className={this.state.selectedChar.name === char.name || this.state.gameOver ? "disabled-button" : null} disabled={this.state.selectedChar.name === char.name  || this.state.gameOver ? true : false}>
-                                    special attack
-                                    {/*if it's a special attack, click to see the description, then click the new button to attack*/}
-                                </button>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        );
+            );
+        }else{
+            return (
+                <div>log in yo</div>
+            )
+        }
     }
 }
 
@@ -162,7 +173,8 @@ class LevelOne extends Component {
 function mapStateToProps(state){
     return{
         teamName: state.teamName,
-        teamMembers: state.team,
+        characters: state.characters,
+        loggedIn: state.loggedIn
     }
 }
 

@@ -46,10 +46,12 @@ export default function reducer(state=initialState, action){
     }
 }
 
-export function updateTeamName(name){
+export function updateTeamName(user, name){
+    const url = `/api/user/${user.id}/name`
+    const promise = axios.put(url, name).then(response => response.data)
     return{
         type: UPDATE_NAME,
-        payload: name
+        payload: user.name
     }
 }
 

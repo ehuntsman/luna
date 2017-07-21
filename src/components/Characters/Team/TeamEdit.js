@@ -19,7 +19,7 @@ class TeamEdit extends Component {
             userInput: e.target.value
         })
     }
-    updateTeamName(name) {
+    updateTeamName(user, name) {
         this.setState({
             userInput: ""
         })
@@ -36,7 +36,7 @@ class TeamEdit extends Component {
                     <p>logged {this.props.loggedIn.username}</p>
                     <h1>{this.props.name}</h1>
                     <input type="text" onChange={this.handleChange} placeholder="change your teamname" value={this.state.userInput}/>
-                    <button onClick={()=>this.updateTeamName(this.state.userInput)}>submit new team name</button>
+                    <button onClick={()=>this.updateTeamName(this.props.loggedIn, this.state.userInput)}>submit new team name</button>
                     <CurrentTeam characters={this.props.characters} user={this.props.loggedIn} selectedChar={this.props.selectedChar}/>
                     <div className="button-container">
                         <Link to="/storymap"><button>Let's go fight!</button></Link>
