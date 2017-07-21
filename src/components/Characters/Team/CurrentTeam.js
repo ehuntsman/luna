@@ -38,14 +38,14 @@ class CurrentTeam extends Component {
             let finalarray = chararray.map( (character, i) => {
                 return (
                     <div className="member" key={i}>
-                        <img src={character.imageurl} />
-                        <h4>{character.name}</h4>
                         <div className="level-element">
                             <div className="level">
                                 <p>level</p>
                             </div>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${character.elementname}.png`} alt="element"/>
                         </div>
+                        <img src={character.imageurl} />
+                        <h4>{character.name}</h4>
                         <button onClick={()=>this.switchEmOut(cake.id, i, this.props.user)}>Switch with {cake.name}</button>
                     </div>
                 )
@@ -67,14 +67,14 @@ class CurrentTeam extends Component {
             let defaulty = defaultCharArray.map( (character, i) => {
                 return (
                     <div className="member">
-                        <img src={character.imageurl} />
-                        <h4>{character.name}</h4>
                         <div className="level-element">
                             <div className="level">
                                 <p>level</p>
                             </div>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${character.elementname}.png`} alt="element"/>
                         </div>
+                        <img src={character.imageurl} />
+                        <h4>{character.name}</h4>
                     </div>
                 )
             })

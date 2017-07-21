@@ -41,7 +41,8 @@ class LevelOne extends Component {
         }
     }
     attackBad(char){
-        let attackPwr = this.state.selectedChar.level * 10;
+        // let attackPwr = this.state.selectedChar.level * 10;
+        let attackPwr = 10;
         if(this.state.badHealth - attackPwr > 0){
             this.setState({
                 badHealth: this.state.badHealth - attackPwr,
@@ -59,7 +60,7 @@ class LevelOne extends Component {
         let badChar = [
             {
                 id: 4,
-                name: "Sylvanas Windrunner",
+                name: "Sylvanas",
                 imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/sylvanas.png",
                 specialattackid: 3,
                 elementid: 3,

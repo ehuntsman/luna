@@ -29,10 +29,12 @@ class CharacterList extends Component {
                     return(
                         <div className="char-box" key={element.id}>
                             <img src={element.imageurl} placeholder={element.name} alt={element.name} />
-                            <p>{element.name}<br/>
-                            <Link to={`/characters/${element.id}`}><button>profile</button></Link>
-                            <button onClick={()=>this.selectMe(element)}>select</button></p>
-                            <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${element.elementname}.png`} alt="element" />
+                            <div className="mini-info">
+                                <p><img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${element.elementname}.png`} alt="element" />
+                                {element.name}</p>
+                                <Link to={`/characters/${element.id}`}><button>profile</button></Link>
+                                <button onClick={()=>this.selectMe(element)}>select</button>
+                            </div>
                         </div>
                     )
                 })}

@@ -31,9 +31,9 @@ class CharacterShow extends Component {
 
 function mapStateToProps(state){
     return{
-        characters: state.reducer.characters,
-        selectedChar: state.reducer.selectedChar,
-        loggedIn: state.userLoginReducer.loggedIn
+        characters: state.characters,
+        selectedChar: state.selectedChar,
+        loggedIn: state.loggedIn
     }
 }
 export default connect(mapStateToProps, {getOneCharacter})(CharacterShow);
