@@ -4,8 +4,6 @@ import router from '../router';
 
 import Navi from './Home/Navi';
 
-
-
 class App extends Component {
   render() {
     return (

@@ -29,6 +29,24 @@ class TeamEdit extends Component {
         this.props.getCharacters()
         this.props.getUserInfo()
     }
+    
+
+
+
+
+
+
+
+    //refreshing the page doesn't pull from database anymore
+
+
+
+
+
+
+
+
+
     render() {
         if(this.props.loggedIn && this.props.loggedIn.username){
             console.log(this.props.loggedIn, "this is the logged in user")

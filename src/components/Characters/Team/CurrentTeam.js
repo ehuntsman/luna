@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {updateCurrentTeam} from '../../../ducks/reducer';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 class CurrentTeam extends Component {
     constructor(props){
@@ -26,6 +27,9 @@ class CurrentTeam extends Component {
                     }
                 }
             }
+            const url = `/api/progress/${this.props.user.id}`
+            const promise = axios.get(url).then(response => response.data);
+            console.log(promise, "this si the weird promsiessssss")
             console.log(chararray, "yo yo yo this is the chararray BRO!")
             let finalarray = chararray.map( (character, i) => {
                 return (
@@ -64,7 +68,7 @@ class CurrentTeam extends Component {
             }
             let defaulty = defaultCharArray.map( (character, i) => {
                 return (
-                    <div className="member">
+                    <div className="member" key={i}>
                         <div className="level-element">
                             <div className="level">
                                 <p>level</p>

@@ -61,17 +61,21 @@ massive(config.connectionString).then((dbInstance) => {
         done(null, user);
     });
 
+    //users 
     app.get('/api/loggeduser', users_controller.me)
-    
     app.get('/api/users', users_controller.getAll)
-
     app.get('/api/user/:id', users_controller.getOneUser)
-
-    app.get('/api/characters', characters_controller.getAllCharacters);
-    app.get('/api/characters/:id', characters_controller.getOneCharacter);
+    app.get('/api/progress/:id', users_controller.checkProgress)
 
     app.put('/api/user/:id', users_controller.update);
     app.put('/api/user/teamname/:id/', users_controller.updateTeamName)
+
+    app.post('/api/progress', users_controller.postProgress)
+
+    //characters
+    app.get('/api/characters', characters_controller.getAllCharacters);
+    app.get('/api/characters/:id', characters_controller.getOneCharacter);
+
 
     app.get('/auth/logout', function (req, res) {
         req.logout();

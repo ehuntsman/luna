@@ -39,5 +39,24 @@ module.exports = {
 			console.log(err)
 			res.status(500).send(err)
 		})
+	},
+	checkProgress: function(req, res, next){
+		const dbInstance = req.app.get('db');
+		dbInstance.get_progress(req.params.id).then( progress => {
+			res.status(200).send(progress)
+		}).catch( (err) => {
+			console.log(err)
+			res.status(500).send(err)
+		})
+	},
+	postProgress: function(req, res, next){
+		const dbInstance = req.app.get('db');
+		console.log(req.body, "this is the body for the post progress");
+		dbInstance.addNewProgress(req.body.userid, req.body.charid).then( progress => {
+			res.status(200).send(progress)
+		}).catch( (err) => {
+			console.log(err)
+			res.status(500).send(err)
+		})
 	}
 }
