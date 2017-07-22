@@ -20,8 +20,6 @@ const GET_USER = 'GET_USER';
 
 export default function reducer(state=initialState, action){
     switch(action.type){
-        case UPDATE_NAME:
-            return Object.assign({}, state, {teamName: action.payload})
         case GET_CHARACTERS + "_PENDING":
             return Object.assign({}, state, {loading: true, error: false})
         case GET_CHARACTERS + "_REJECTED":
@@ -41,17 +39,23 @@ export default function reducer(state=initialState, action){
         case GET_USER + "_FULFILLED":
             return Object.assign({}, state, {loading: false, loggedIn: action.payload})
         case SWITCH_CHARACTERS:
+            return Object.assign({}, state, {loggedIn: action.payload, selectedChar: {}})
+        case UPDATE_NAME:
             return Object.assign({}, state, {loggedIn: action.payload})
         default: return state;
     }
 }
 
 export function updateTeamName(user, name){
-    const url = `/api/user/${user.id}/name`
-    const promise = axios.put(url, name).then(response => response.data)
+    const url = `/api/user/teamname/${user.id}`
+    const promise = axios.put(url, {name}).then(response => {
+        console.log(user, name, "this is the response data")
+        return response.data
+    })
+    const sugar = Object.assign({}, user, {teamname: name})
     return{
         type: UPDATE_NAME,
-        payload: user.name
+        payload: sugar
     }
 }
 

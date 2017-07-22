@@ -14,16 +14,8 @@ class CurrentTeam extends Component {
         this.props.updateCurrentTeam(a,b,c)
     }
 
-
-
 //////// display chars in order
     render() {
-        let cake = "";
-        if(this.props.selectedChar){
-            cake = this.props.selectedChar
-        }else{
-            cake = "dance"
-        }
         if(this.props.user){
             let temparray = this.props.user.currentteam;
             let chararray = [];
@@ -44,9 +36,15 @@ class CurrentTeam extends Component {
                             </div>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${character.elementname}.png`} alt="element"/>
                         </div>
-                        <img src={character.imageurl} />
+                        <img src={character.imageurl} alt={character.name} />
                         <h4>{character.name}</h4>
-                        <button onClick={()=>this.switchEmOut(cake.id, i, this.props.user)}>Switch with {cake.name}</button>
+                        {
+                            this.props.selectedChar.id
+                        ?
+                            <button onClick={()=>this.switchEmOut(this.props.selectedChar.id, i, this.props.user)}>Switch with {this.props.selectedChar.name}</button>
+                        :
+                            <div></div>
+                        }
                     </div>
                 )
             })

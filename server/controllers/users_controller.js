@@ -21,6 +21,15 @@ module.exports = {
 		.then( user => res.status(200).send(user[0]) )
 		.catch( () => res.status(500).send() );
   },
+	updateTeamName: function(req,res,next){
+		const dbInstance = req.app.get('db');
+		console.log(req, "some console for the soul of the updateteamname", req.params.id);
+		dbInstance.update_teamname([req.body.name, req.params.id]).then( user => {
+			res.status(200).send(user)
+		}).catch( (err) => {
+			res.status(500).send(err)
+		})
+	},
 	update: function(req,res,next){
 		const dbInstance = req.app.get('db');
 		console.log(req.body, "this is the new team in my functions server")

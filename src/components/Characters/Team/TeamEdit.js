@@ -14,16 +14,16 @@ class TeamEdit extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
     }
-    handleChange(e){
+    handleChange(val){
         this.setState({
-            userInput: e.target.value
+            userInput: val
         })
     }
     updateTeamName(user, name) {
         this.setState({
-            userInput: ""
+            userInput: "",
         })
-        this.props.updateTeamName(name);
+        this.props.updateTeamName(user, name)
     }
     componentDidMount() {
         this.props.getCharacters()
@@ -31,11 +31,12 @@ class TeamEdit extends Component {
     }
     render() {
         if(this.props.loggedIn && this.props.loggedIn.username){
+            console.log(this.props.loggedIn, "this is the logged in user")
             return (
                 <div className="edit-team-container">
                     <p>logged {this.props.loggedIn.username}</p>
-                    <h1>{this.props.name}</h1>
-                    <input type="text" onChange={this.handleChange} placeholder="change your teamname" value={this.state.userInput}/>
+                    <h1>{this.props.loggedIn.teamname}</h1>
+                    <input type="text" onChange={(e)=>this.handleChange(e.target.value)} placeholder="change your teamname" value={this.state.userInput}/>
                     <button onClick={()=>this.updateTeamName(this.props.loggedIn, this.state.userInput)}>submit new team name</button>
                     <CurrentTeam characters={this.props.characters} user={this.props.loggedIn} selectedChar={this.props.selectedChar}/>
                     <div className="button-container">
@@ -59,7 +60,7 @@ class TeamEdit extends Component {
                     <hr/>
                     <hr/>
                     <hr/>
-                    not logged in shouldn't be here'
+                    not logged in shouldn't be here
                     <CharacterList characters={this.props.characters}/>
                 </div>
             );
@@ -69,7 +70,6 @@ class TeamEdit extends Component {
 
 function mapStateToProps(state){
     return{
-        name: state.teamName,
         story: state.storyPoint,
         characters: state.characters,
         loggedIn: state.loggedIn,

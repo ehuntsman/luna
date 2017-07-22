@@ -71,6 +71,7 @@ massive(config.connectionString).then((dbInstance) => {
     app.get('/api/characters/:id', characters_controller.getOneCharacter);
 
     app.put('/api/user/:id', users_controller.update);
+    app.put('/api/user/teamname/:id/', users_controller.updateTeamName)
 
     app.get('/auth/logout', function (req, res) {
         req.logout();
