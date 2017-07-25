@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {updateCurrentTeam} from '../../../ducks/reducer';
+import {updateCurrentTeam, getUserInfo} from '../../../ducks/reducer';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
@@ -13,9 +13,9 @@ class CurrentTeam extends Component {
     }
     switchEmOut(a,b,c){
         this.props.updateCurrentTeam(a,b,c)
+        // this.props.getUserInfo() 
     }
 
-//////// display chars in order
     render() {
         if(this.props.user){
             let temparray = this.props.user.currentteam;
@@ -29,8 +29,6 @@ class CurrentTeam extends Component {
             }
             const url = `/api/progress/${this.props.user.id}`
             const promise = axios.get(url).then(response => response.data);
-            console.log(promise, "this si the weird promsiessssss")
-            console.log(chararray, "yo yo yo this is the chararray BRO!")
             let finalarray = chararray.map( (character, i) => {
                 return (
                     <div className="member" key={i}>
@@ -40,7 +38,7 @@ class CurrentTeam extends Component {
                             </div>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${character.elementname}.png`} alt="element"/>
                         </div>
-                        <img src={character.imageurl} alt={character.name} />
+                        <img src={character.framed} alt={character.name} />
                         <h4>{character.name}</h4>
                         {
                             this.props.selectedChar.id
@@ -75,7 +73,7 @@ class CurrentTeam extends Component {
                             </div>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${character.elementname}.png`} alt="element"/>
                         </div>
-                        <img src={character.imageurl} />
+                        <img src={character.framed} alt={character.name}/>
                         <h4>{character.name}</h4>
                     </div>
                 )
@@ -90,4 +88,4 @@ class CurrentTeam extends Component {
     }
 }
 
-export default connect(null, {updateCurrentTeam})(CurrentTeam);
+export default connect(null, {updateCurrentTeam, getUserInfo})(CurrentTeam);

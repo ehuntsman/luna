@@ -300,41 +300,71 @@
     }
   }
 
+  .level-one {
+    background: url('./components/Story/Levels/levelgravityfalls.png') no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
   .level-current-team {
     text-align: center;
-    padding: 30px;
+    padding: 5vh 1vw;
     color: white;
-    background: url('./components/Story/blurback.png') no-repeat;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    width: 96vw;
-    .team-name h1 {
-      margin: 0;
+    height: 90vh;
+    overflow: hidden;
+    width: 98vw;
+    .bad-team,
+    .current-team-container {
+      width: 50%;
+      padding: 0;
+      display: inline-block;
+      vertical-align: top;
+    }
+    h1 {
+      margin: 2vh auto -2vh auto;
     }
     .selected-char {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
+    .member0 .char-sprite {
+      margin-left: 0;
+    }
+    .member1 .char-sprite {
+      margin-left: 8vw;
+      margin-top: -3.3vh;
+    }
+    .member2 .char-sprite{
+      margin-left: 16vw;
+      margin-top: -6.6vh;
+    }
+    .member3 .char-sprite{
+      margin-left: 8vw;
+      margin-top: -10vh;
+    }
+    .member4 .char-sprite{
+      margin-left: 0vw;
+      margin-top: -15vh;
+    }
     .member {
-      display: inline-block;
       vertical-align: bottom;
-      img {
-        width: 12vw;
-        border: 1px solid $purple;
-        margin: 0 2vw 2vw 2vw;
+      text-align: left;
+      height: 14vh;
+      .char-data-attack {
+        vertical-align: top;
+        width: 15vw;
+        display: inline-block;
+      }
+      .char-sprite {
+        height: 25vh;
       }
       h4 {
         background: $purple;
         background: rgba(49,43,86,0.25);
         background: radial-gradient(ellipse at center, rgba(49,43,86,0.25) 0%,rgba(49,43,86,0.75) 100%);
-        color: white;
-        border-radius: 40% 40% 0 0;
         font-size: 15px;
-        margin: 0 auto 0 auto;
-        padding: 6px 0 5px 0;
-        width: 11vw;
-        border: 1px solid $purple;
-        border-bottom: none;
+        padding: 6px 8px 5px 5px;
+        line-height: 15px;
+        display: inline-block;
+        margin: 0;
       }
       .level {
         width: 30px;
@@ -345,7 +375,7 @@
         position: relative;
         z-index: 2;
         display: inline-block;
-        margin: 0 15px;
+        margin: 0px 7px;
         vertical-align: bottom;
         p{
           padding: 0;
@@ -353,18 +383,93 @@
           line-height: 30px;
         }
       }
-      .level-element {
-        margin: -46px auto 0 auto;
-      }
       .element-icon {
-        margin: 0 15px;
-        width: 30px;
-        height: 30px;
-        display: inline-block;
-        vertical-align: bottom;
-        border: none;
+        width: 15px;
+        height: 15px;
+        margin: 4px 0 0 5px;
       }
     }
+  }
+
+  .bad-team {
+    text-align: center;
+    padding: 5vh 1vw;
+    color: white;
+    height: 100vh;
+    width: 98vw;
+    .selected-char {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .attackme {
+      display: block;
+    }
+    .name-level-element {
+      display: inline-block;
+      vertical-align: top;
+      width: 13vw;
+    }
+    .member {
+      vertical-align: bottom;
+      text-align: right;
+      height: 28vh;
+      .char-data-attack {
+        vertical-align: top;
+        width: 15vw;
+        display: inline-block;
+      }
+      .char-sprite {
+        height: 25vh;
+      }
+      h4 {
+        background: $purple;
+        background: rgba(49,43,86,0.25);
+        background: radial-gradient(ellipse at center, rgba(49,43,86,0.25) 0%,rgba(49,43,86,0.75) 100%);
+        font-size: 15px;
+        padding: 6px 5px 5px 8px;
+        line-height: 15px;
+        display: inline-block;
+        margin: 0;
+      }
+      .level {
+        width: 30px;
+        height: 30px;
+        border-radius: 20px;
+        background: $darkpurple;
+        color: white;
+        position: relative;
+        z-index: 2;
+        display: inline-block;
+        margin: 0px 7px;
+        vertical-align: bottom;
+        p{
+          padding: 0;
+          margin: 0;
+          line-height: 30px;
+        }
+      }
+      .element-icon {
+        width: 15px;
+        height: 15px;
+        margin: 4px 5px 0 0;
+      }
+    }
+  }
+
+  .health-bar-myteam,
+  .health-bar-badteam {
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      margin: 0 auto 3vh auto;
+      .outer-health-bar {
+        border: 1px solid #222;
+        width: 100%;
+        height: 20px;
+      }
+      .inner-health-bar {
+        background: #71A60F;
+        height: 20px;
+      }
   }
 
 // /////////////////////////////////////////////////////////////////

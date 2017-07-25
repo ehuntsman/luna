@@ -32,7 +32,16 @@ massive(config.connectionString).then((dbInstance) => {
         domain: config.domain,
         clientID: config.clientID,
         clientSecret: config.clientSecret,
-        callbackURL: 'http://localhost:3000/auth/callback'
+        callbackURL: 'http://localhost:3000/auth/callback',
+        options: {
+            theme: {
+                logo: 'https://s3-us-west-2.amazonaws.com/devschoolluna/logo-01.png',
+                primaryColor: '#3DA9B5',
+                authButtons: {
+                    primaryColor: '#000000'
+                }
+            }
+        }
     }, function (accessToken, refreshToken, extraParams, profile, done) {
         
         dbInstance.getUserByAuthId([profile.identities[0].user_id]).then((user) => {

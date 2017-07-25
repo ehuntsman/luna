@@ -15,7 +15,6 @@ const GET_ONE_CHARACTER = "GET_ONE_CHARACTER";
 const UPDATE_NAME = 'UPDATE_NAME';
 const SELECTED_CHAR = "SELECTED_CHAR";
 const SWITCH_CHARACTERS = "SWITCH_CHARACTERS";
-
 const GET_USER = 'GET_USER';
 
 export default function reducer(state=initialState, action){
@@ -49,13 +48,12 @@ export default function reducer(state=initialState, action){
 export function updateTeamName(user, name){
     const url = `/api/user/teamname/${user.id}`
     const promise = axios.put(url, {name}).then(response => {
-        console.log(user, name, "this is the response data")
         return response.data
     })
-    const sugar = Object.assign({}, user, {teamname: name})
+    const result = Object.assign({}, user, {teamname: name})
     return{
         type: UPDATE_NAME,
-        payload: sugar
+        payload: result
     }
 }
 
@@ -87,7 +85,7 @@ export function selectedOne(char){
 export function getUserInfo() {
     // when you make a new user, then add all the characters with level 1.
     const url = `/api/loggeduser`
-    const promise = axios.get(url).then(res => {
+    const promise = axios.get(url).then(res => 
         // if(res.data && res.data.id){
         //     const progress = axios.get(`/api/progress/${res.data.id}`).then(response => {
         //         if(response.data.length === 0){
@@ -139,8 +137,8 @@ export function getUserInfo() {
         //         return response.data
         //     })
         // }
-        return res.data
-    });
+        res.data
+    );
 
     return {
         type: GET_USER,
@@ -153,7 +151,6 @@ export function updateCurrentTeam(joinus, indexnum, user){
     let userObj = Object.assign({}, user)
     newteam.splice(indexnum, 1, joinus+"")
     userObj.currentteam = newteam
-    console.log(userObj, "this is the going in one");
     const url = `/api/user/${user.id}`
     const promise = axios.put(url, userObj.currentteam).then(response => response.data);
     return {
