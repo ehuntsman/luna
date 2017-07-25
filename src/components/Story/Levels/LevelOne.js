@@ -40,6 +40,7 @@ class LevelOne extends Component {
         this.handleSelection = this.handleSelection.bind(this);
         this.attackBad = this.attackBad.bind(this);
         this.attackGood = this.attackGood.bind(this);
+        this.resetText = this.resetText.bind(this);
     }
     componentDidMount(){
         // let myarr = this.props.loggedIn.currentteam;
@@ -80,6 +81,9 @@ class LevelOne extends Component {
             })
         }
     }
+    resetText(){
+        $("#attack-text").text("Select a character to start an attack").delay(2000);
+    }
     attackGood() {
         //good animation
         function getRandomInt(min, max) {
@@ -97,8 +101,8 @@ class LevelOne extends Component {
             selectedChar: randomBaddie
         });
         //text
-        let attackText = randomBaddie.name + " attacks " + randomGoodie.name
-        $("#attack-text").text(attackText).delay(1000);
+        let attackText = randomBaddie.name + " attacked " + randomGoodie.name
+        $("#attack-text").text(attackText).delay(4000);
         //animation
         $('.selected-char .char-sprite').animate(
             {
@@ -120,7 +124,7 @@ class LevelOne extends Component {
             },
             50,
             'swing'
-        );
+        ).delay(2000);
         let attackPwr = 10;
         let myelem = randomBaddie.elementname;
         let badelem = randomGoodie.elementname;
@@ -134,7 +138,8 @@ class LevelOne extends Component {
             this.setState({
                 myHealth: this.state.myHealth - attackPwr,
                 selectedChar: {}
-            })
+            });
+            setTimeout(this.resetText, 1000);
         }else{
             this.setState({
                 myHealth: this.state.myHealth - attackPwr,
@@ -144,7 +149,9 @@ class LevelOne extends Component {
         }
     }
     attackBad(char){
-        console.log("this is the selkected char", this.state.selectedChar)
+        //attack texts
+        let attackText = this.state.selectedChar.name + " attacked " + char.name
+        $("#attack-text").text(attackText).delay(2000);
         // let attackPwr = this.state.selectedChar.level * 10;
         var attackingChar = document.getElementsByClassName("selected-char");
         // .selectedChar .sprite animates
@@ -219,7 +226,7 @@ class LevelOne extends Component {
             return (
                 <div className="level-current-team level-one">
                     <h1>level one</h1>
-                    <h1 id="attack-text"></h1>
+                    <h1 id="attack-text">Select a character to start an attack</h1>
                     <div className="current-team-container">                        
                         <div className="health-bar-myteam">
                             <div className="outer-health-bar">
