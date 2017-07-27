@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import CurrentTeam from './CurrentTeam';
 import CharacterList from './CharacterList';
 import {Link} from 'react-router-dom';
+import config from './../../../config.js';
 
 import {updateTeamName, getCharacters, getUserInfo, updateCurrentTeam} from '../../../ducks/reducer';
 
@@ -56,7 +57,7 @@ class TeamEdit extends Component {
             return(
                 <div className="edit-team-container not-logged">
                     <h1>Log in to create and customize your team</h1>
-                    <a href="http://localhost:3000/auth"><button>Sign in</button></a>
+                    <a href={config.logIn}><button>Sign in</button></a>
                 </div>
             );
         }

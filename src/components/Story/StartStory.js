@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import rulesheader from './rulesheader.jpg';
 import {Link} from 'react-router-dom';
+import config from './../../config.js';
 
 class StartStory extends Component {
     render() {
@@ -34,7 +35,7 @@ class StartStory extends Component {
                 </div>
                 <div className="story-start">
                     <h1>Dying to play?</h1>
-                    <a href="http://localhost:3000/auth"><button>Log in to create your team</button></a>
+                    <a href={config.logIn}><button>Log in to create your team</button></a>
                 </div>
             </div>
         );
