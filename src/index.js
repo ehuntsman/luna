@@ -15,4 +15,4 @@ ReactDOM.render(
         </HashRouter>
     </Provider>,
     document.getElementById('root'));
-unregister()
+// unregister()

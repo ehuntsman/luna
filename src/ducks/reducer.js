@@ -7,7 +7,8 @@ const initialState = {
     loading: false,
     error: false,
     selectedChar: {},
-    loggedIn: {}
+    loggedIn: {},
+    specialAttacks: []
 }
 
 const GET_CHARACTERS = "GET_CHARACTERS";
@@ -16,6 +17,7 @@ const UPDATE_NAME = 'UPDATE_NAME';
 const SELECTED_CHAR = "SELECTED_CHAR";
 const SWITCH_CHARACTERS = "SWITCH_CHARACTERS";
 const GET_USER = 'GET_USER';
+const GET_SPECIALS = "GET_SPECIALS";
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -40,15 +42,18 @@ export default function reducer(state = initialState, action) {
         case SWITCH_CHARACTERS:
             return Object.assign({}, state, { loggedIn: action.payload, selectedChar: {} })
         case UPDATE_NAME:
-            // console.log(action.payload, "this is the new state inside my reduicer fdhkdfshjk;sadhdfsjkh")
             return Object.assign({}, state, { loggedIn: action.payload })
+        case GET_SPECIALS + "_PENDING":
+            return Object.assign({}, state, { loading: true })
+        case GET_SPECIALS + "_FULFILLED":
+            return Object.assign({}, state, { specialAttacks: action.payload })
         default: return state;
     }
 }
 
 export function updateTeamName(user, name) {
     const url = `/api/user/teamname/${user.id}`
-    const promise = axios.put(url, { name }).then(response => {
+    axios.put(url, { name }).then(response => {
         return response.data
     })
     const result = Object.assign({}, user, { teamname: name })
@@ -86,7 +91,6 @@ export function selectedOne(char) {
 export function getUserInfo() {
     const url = `/api/loggeduser`
     const promise = axios.get(url).then(res => {
-        console.log('abc')
         return res.data
     });
     return {
@@ -101,9 +105,18 @@ export function updateCurrentTeam(joinus, indexnum, user) {
     newteam.splice(indexnum, 1, joinus + "")
     userObj.currentteam = newteam
     const url = `/api/user/${user.id}`
-    const promise = axios.put(url, userObj.currentteam).then(response => response.data);
+    axios.put(url, userObj.currentteam).then(response => response.data);
     return {
         type: SWITCH_CHARACTERS,
         payload: userObj
+    }
+}
+
+export function getSpecialAttacks(){
+    const url = "/api/specialattacks";
+    const promise = axios.get(url).then(response => response.data);
+    return {
+        type: GET_SPECIALS,
+        payload: promise
     }
 }

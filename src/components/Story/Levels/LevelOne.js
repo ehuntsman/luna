@@ -3,7 +3,8 @@ import CurrentTeam from '../../Characters/Team/CurrentTeam';
 import {connect} from 'react-redux';
 import $ from 'jquery';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+
+import {getSpecialAttacks} from '../../../ducks/reducer';
 
 class LevelOne extends Component {
     constructor(props){
@@ -38,7 +39,8 @@ class LevelOne extends Component {
                 }
             ],
             myteam: {},
-            disabled: false
+            disabled: false,
+            cooldown:[0,0,0,0,0]
         }
         this.handleSelection = this.handleSelection.bind(this);
         this.attackBad = this.attackBad.bind(this);
@@ -48,14 +50,10 @@ class LevelOne extends Component {
     }
 
     componentDidMount(){
-        // let myarr = this.props.loggedIn.currentteam;
         const myTotalHealth = 500;
-        // const myTotalHealth = myarr.reduce( (prev,next) => prev + next.health,0);
         let badarr = this.state.badTeam;
         const badTotalHealth = badarr.reduce( (prev, next) => prev + next.health,0);
-        // getSpecialAttacks();
-        const url = "/api/specialattacks";
-        const attackpromise = axios.get(url).then(response => response.data);
+        this.props.getSpecialAttacks();
         if(this.props.loggedIn && this.props.loggedIn.username){
             let tempone = this.props.loggedIn.currentteam;
             let tempchararray = [];
@@ -70,13 +68,13 @@ class LevelOne extends Component {
                 myHealth: myTotalHealth,
                 badHealth: badTotalHealth,
                 myteam: tempchararray,
-                specialAttacks: attackpromise
+                specialAttacks: this.props.specialAttacks
             })
         }else{
             this.setState({
                 myHealth: myTotalHealth,
                 badHealth: badTotalHealth,
-                specialAttacks: attackpromise
+                specialAttacks: this.props.specialAttacks
             })
         }
     }
@@ -94,31 +92,24 @@ class LevelOne extends Component {
     resetText(){
         $("#attack-text").text("Select a character to start an attack").delay(2000);
     }
-
-
-
-
-
-
-
-
-    specialAttackGood(char){
+    specialAttackGood(char, index){
         this.setState({
             selectedChar: {}
         })
         //api call for special attack info
         // btw, uh, special attacks attack everyone now, lol
-        let charSpecAttack = {};
-        console.log(this.state.specialAttacks, "killer tofu");
-        for(var j = 0; j < this.state.specialAttacks.length; j++){
-            console.log(this.state.specialAttacks[j], "killer tofu");
-            if(this.state.specialAttacks[j].attackid == char.specialattackid){
-                console.log(this.state.specialAttacks[j], "weeeeeeeeeeeeeeeeeeeeeeee");
-                let charSpecAttack = this.state.specialAttacks[j]
+        let charSpecAttack = undefined;
+        let attackname = "no";
+        for(var j = 0; j < this.props.specialAttacks.length; j++){
+            if(this.props.specialAttacks[j].attackid == char.specialattackid){
+                console.log(this.props.specialAttacks[j], "weeeeeeeeeeeeeeeeeeeeeeee");
+                charSpecAttack = this.props.specialAttacks[j]
+                attackname = this.props.specialAttacks[j].name
             }
         }
+        console.log("this is the special attack", charSpecAttack, attackname)
         //attack text
-        let attackText = char.name + " used a special attack!";
+        let attackText = char.name + " used " + charSpecAttack.name;
         $("#attack-text").text(attackText).delay(2000);
         //animation - needs to be cooler!!!!! Maybe swipe the card across the sceen????
         $('.selected-char .char-sprite').animate(
@@ -142,18 +133,19 @@ class LevelOne extends Component {
             50,
             'swing'
         );
-        //call the special attack info
-        let attackPwr = 10;
         //calc attack power
-        if(this.state.badHealth - attackPwr > 0){
+        let newcd = this.state.cooldown.slice(0);
+        newcd[index] = charSpecAttack.cooldown;
+        if(this.state.badHealth - charSpecAttack.baseattack > 0){
             this.setState({
-                badHealth: this.state.badHealth - attackPwr,
+                badHealth: this.state.badHealth - charSpecAttack.baseattack,
                 selectedChar: {},
-                disabled: true
+                disabled: true,
+                cooldown: newcd
             })
         }else{
             this.setState({
-                badHealth: this.state.badHealth - attackPwr,
+                badHealth: this.state.badHealth - charSpecAttack.baseattack,
                 gameOver: true,
                 selectedChar: {},
                 disabled: true
@@ -162,16 +154,6 @@ class LevelOne extends Component {
         // then have the villians attack here
         setTimeout(this.attackGood, 1000);
     }
-
-
-
-
-
-
-
-
-
-
     attackGood() {
         //good animation
         function getRandomInt(min, max) {
@@ -278,12 +260,19 @@ class LevelOne extends Component {
                 attackPwr = 5;
             }
         //are they compatible?
-        //calc attack power
+        //calc attack power and cooldown
+        let newcd = this.state.cooldown.slice(0);
+        for(var i = 0; i < newcd.length; i++){
+            if(newcd[i] > 0){
+                newcd[i]--
+            }
+        }
         if(this.state.badHealth - attackPwr > 0){
             this.setState({
                 badHealth: this.state.badHealth - attackPwr,
                 selectedChar: {},
-                disabled: true
+                disabled: true,
+                cooldown: newcd
             })
         }else{
             this.setState({
@@ -298,7 +287,6 @@ class LevelOne extends Component {
         // this.attackGood();
 }
     render() {
-
         if(this.props.loggedIn && this.props.loggedIn.username){
             let temparray = this.props.loggedIn.currentteam;
             let chararray = [];
@@ -342,18 +330,26 @@ class LevelOne extends Component {
                                         </div>
                                         <button 
                                             onClick={(e) => this.handleSelection(char)}
-                                            className={this.state.disabled ? "disabled-button" : null}
-                                            disabled={this.state.disabled ? true : false}>
+                                            className={this.state.disabled || this.state.gameOver ? "disabled-button" : null}
+                                            disabled={this.state.disabled || this.state.gameOver ? true : false}>
                                             {this.state.selectedChar.name === char.name ? "deselect" : "attack!"}
                                         </button>
                                         <button 
-                                            onClick={(e) => this.specialAttackGood(char)}
-                                            className={this.state.selectedChar.name === char.name || this.state.disabled ? "disabled-button" : null}
-                                            disabled={this.state.selectedChar.name === char.name  || this.state.disabled ? true : false}>
+                                            onClick={(e) => this.specialAttackGood(char, index)}
+                                            className={this.state.selectedChar.name === char.name || this.state.disabled || this.state.gameOver ? "disabled-button" : null}
+                                            disabled={this.state.selectedChar.name === char.name  || this.state.disabled || this.state.gameOver ? true : false}>
                                             special attack
                                         </button>
                                     </div>
-                                    <img src={char.imageurl} placeholder={char.name} onClick={(e) => this.handleSelection(char)} className="char-sprite" alt={char.name}/>
+
+                                    <sprite>
+                                        { this.state.cooldown[index] > 0 ?
+                                            <h1 className="on-cooldown">{this.state.cooldown[index]}</h1>
+                                        :
+                                        null
+                                        }
+                                        <img src={char.imageurl} placeholder={char.name} onClick={(e) => this.handleSelection(char)} className="char-sprite" alt={char.name}/>
+                                    </sprite>
                                 </div>
                             )
                         })}
@@ -375,41 +371,47 @@ class LevelOne extends Component {
                                         <Link to="/storymap"><button>try again</button></Link>
                                         <Link to="/myteam"><button>return to my team</button></Link>
                                     </div>
-                                : null
-                            }
-                            <div className="health-bar-badteam">
-                                <div className="outer-health-bar">
-                                    <div className="inner-health-bar" style={{width: `${badHealthPercent}%`}}>
-                                    </div>
-                                </div>
-                                villians {this.state.badHealth}
-                            </div>
-                            {this.state.badChar.map( (badChar) => {
-                                return(
-                                    <div key={badChar.id} className={this.state.selectedChar.name === badChar.name ? "selected-char member" : "member"}>
-                                        <img src={badChar.imageurl} placeholder={badChar.name} onClick={this.state.selectedChar.elementname ? (e) => this.attackBad(badChar) : ""} className="char-sprite" alt={badChar.name}/>
-                                        <div className="name-level-element">
-                                            <div>
-                                                <h4>{badChar.name}</h4>
-                                                <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${badChar.elementname}.png`}alt={badChar.elementname}/>
+                                :
+                                <div>
+                                    <div className="health-bar-badteam">
+                                        <div className="outer-health-bar">
+                                            <div className="inner-health-bar" style={{width: `${badHealthPercent}%`}}>
                                             </div>
-                                            {
-                                                this.state.selectedChar.name
-                                                ? <button className="attackme" onClick={(e) => this.attackBad(badChar)}>attack {badChar.name}</button>
-                                                : <div className="button-spacer"></div>
-                                            }
                                         </div>
+                                        villians {this.state.badHealth}
                                     </div>
-                                )
-                            })}
+                                    {this.state.badChar.map( (badChar) => {
+                                        return(
+                                            <div key={badChar.id} className={this.state.selectedChar.name === badChar.name ? "selected-char member" : "member"}>
+                                                <img src={badChar.imageurl} placeholder={badChar.name} onClick={this.state.selectedChar.elementname ? (e) => this.attackBad(badChar) : ""} className="char-sprite" alt={badChar.name}/>
+                                                <div className="name-level-element">
+                                                    <div>
+                                                        <h4>{badChar.name}</h4>
+                                                        <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${badChar.elementname}.png`}alt={badChar.elementname}/>
+                                                    </div>
+                                                    {
+                                                        this.state.selectedChar.name
+                                                        ? <button className="attackme" onClick={(e) => this.attackBad(badChar)}>attack {badChar.name}</button>
+                                                        : <div className="button-spacer"></div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
             );
         }else{
             return (
-                <div>log in yo</div>
-            )
+                <div className="level-current-team level-one">
+                    Sign in to create a team and fight
+                </div>
+            );
+
+
         }
     }
 }
@@ -419,8 +421,9 @@ function mapStateToProps(state){
     return{
         teamName: state.teamName,
         characters: state.characters,
-        loggedIn: state.loggedIn
+        loggedIn: state.loggedIn,
+        specialAttacks: state.specialAttacks
     }
 }
 
-export default connect(mapStateToProps, {})(LevelOne);
+export default connect(mapStateToProps, {getSpecialAttacks})(LevelOne);

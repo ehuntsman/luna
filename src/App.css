@@ -131,7 +131,8 @@ button {
 .story-intro {
   width: 100vw;
   background: #020806;
-  color: white; }
+  color: white;
+  text-align: center; }
 
 .story-intro-hero {
   -webkit-clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
@@ -143,11 +144,20 @@ button {
 
 .otherworldstitle {
   width: 50vw;
-  margin-left: auto; }
-  .otherworldstitle .there-these {
-    font-family: 'Meddon', cursive; }
+  margin-left: 43vw; }
+  .otherworldstitle .there-these1 {
+    font-family: 'Meddon', cursive;
+    margin-left: -20vw;
+    margin-bottom: -4vh; }
+  .otherworldstitle .there-these2 {
+    font-family: 'Meddon', cursive;
+    margin-right: -23vw;
+    margin-top: -4vh; }
   .otherworldstitle .other-worlds {
     font-family: 'Metamorphous', cursive; }
+
+.story-start {
+  padding-bottom: 4vh; }
 
 .story-body, .story-rules {
   margin-left: auto;
@@ -162,6 +172,9 @@ button {
   height: 100vh;
   padding-top: 50px;
   text-align: center; }
+
+.not-logged {
+  height: 100vh; }
 
 .edit-team-container {
   text-align: center;
@@ -214,6 +227,9 @@ button {
       border-radius: 0;
       border: none;
       margin-right: -74px; }
+
+.not-logged-edit {
+  height: 100vh; }
 
 .level-one {
   background: url("./components/Story/Levels/levelgravityfalls.png") no-repeat;
@@ -363,6 +379,18 @@ button {
       height: 15px;
       margin: 4px 5px 0 0; }
 
+.cooldown-countdown {
+  display: none;
+  padding: 0;
+  margin: 0; }
+
+.on-cooldown {
+  border: 10px solid red;
+  padding: 0;
+  margin: 0; }
+  .on-cooldown .cooldown-countdown {
+    display: inline; }
+
 .health-bar-myteam,
 .health-bar-badteam {
   width: 300px;
@@ -392,7 +420,8 @@ button {
   left: 25vw;
   background-size: contain;
   padding-top: 33vh;
-  color: black; }
+  color: black;
+  z-index: 10; }
 
 .you-lose {
   background: url("./components/Story/Levels/lose.png") no-repeat;
@@ -403,7 +432,8 @@ button {
   left: 25vw;
   background-size: contain;
   padding-top: 33vh;
-  color: black; }
+  color: black;
+  z-index: 10; }
 
 .all-characters-container {
   margin-bottom: 30px;

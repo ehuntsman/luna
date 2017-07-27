@@ -10,9 +10,9 @@ class StartStory extends Component {
                     <div className="story-intro-hero">
                         {/*<img src={header} alt="there are other worlds than these"/>*/}
                         <div className="otherworldstitle">
-                            <h2 className="there-these">There are</h2>
+                            <h2 className="there-these1">There are</h2>
                             <h1 className="other-worlds">Other Worlds</h1>
-                            <h2 className="there-these">than these.</h2>
+                            <h2 className="there-these2">than these.</h2>
                         </div>
                     </div>
 
@@ -26,22 +26,15 @@ class StartStory extends Component {
                 </div>
                 <div className="story-rules">
                     <img src={rulesheader} alt="rules"/>
-                    <h1>How to Play</h1>
-                    <p>these are the instructions on how to play</p>
+                    <h1>Notes for Playing</h1>
                     <ul>
-                        <li>Make a team</li>
-                        <li>fight</li>
-                        <li>vlah blah write later</li>
+                        <li>Special Attacks are powerful, but come with a cooldown</li>
+                        <li>Beware of elements and how they effect eachother</li>
                     </ul>
                 </div>
                 <div className="story-start">
                     <h1>Dying to play?</h1>
-                    <h3>We highly suggest you create an account so you can save your team and create new team members</h3>
-                    <p>You can play without it if you must</p>
-                    <a href="http://localhost:3000/auth"><button>Log in to save your team</button></a>
-                    <Link to="/myteam">
-                        <button>Whatever. Give me a team to play with!</button>
-                    </Link>
+                    <a href="http://localhost:3000/auth"><button>Log in to create your team</button></a>
                 </div>
             </div>
         );

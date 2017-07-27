@@ -35,18 +35,8 @@ class TeamEdit extends Component {
         this.props.getCharacters()
         this.props.getUserInfo()
     }
-    // componentDidUpdate(prevprops){
-    //     if(prevprops.loggedIn.teamname !== this.props.loggedIn.teamname){
-    //         setTimeout(() => {
-    //          this.props.getUserInfo()
-    //         },1)
-    //     }else{
-    //         console.log(prevprops,  "next props FAILLLLLLLL")
-    //     }
-    // }
 
     render() {
-        console.log(this.props.loggedIn.teamname, "this is the new teamname from state");
         if(this.props.loggedIn && this.props.loggedIn.username){
             return (
                 <div className="edit-team-container">
@@ -64,19 +54,9 @@ class TeamEdit extends Component {
             );
         }else{
             return(
-                <div className="edit-team-container">
+                <div className="edit-team-container not-logged">
                     <h1>Log in to create and customize your team</h1>
-                    <h3>Otherwise, feel free to use this team!</h3>
-                    <CurrentTeam characters={this.props.characters} />
-                    <div className="button-container">
-                        <Link to="/storymap"><button>Let's go fight!</button></Link>
-                    </div>
-                    <hr/>
-                    <hr/>
-                    <hr/>
-                    <hr/>
-                    not logged in shouldn't be here
-                    <CharacterList characters={this.props.characters}/>
+                    <a href="http://localhost:3000/auth"><button>Sign in</button></a>
                 </div>
             );
         }

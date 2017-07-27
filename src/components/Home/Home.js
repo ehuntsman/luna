@@ -2,9 +2,21 @@ import React, { Component } from 'react';
 import logo from './logo-01.png';
 import cloud from './cloud.png';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+import {getUserInfo} from '../../ducks/reducer';
 
 class Home extends Component {
+    componentDidMount() {
+        this.props.getUserInfo()
+    }
     render() {
+        let amILoggedIn = "";
+        if(this.props.loggedIn){
+            amILoggedIn = <button>Continue</button>
+        }else{
+            amILoggedIn = <Link to="/start" id="new-story-button"><button>Start a New Quest</button></Link>
+        }
         return (
             <div className="home-page">
                 <div className="clouds-wrapper">
@@ -16,13 +28,7 @@ class Home extends Component {
                 <div className="home-container">
                     <img src={logo} className="home-logo" alt="logo" />
                     <div className="home-links">
-                        <Link to="/start" id="new-story-button">
-                            <button>Start a New Quest</button>
-                        </Link>
-                        <a href="http://localhost:3000/auth"><button>Log In</button></a>
-                        <p>or</p>
-                        {/*if signed in*/}
-                        <button>Continue</button>
+                        {amILoggedIn}
                     </div>
                 </div>
 
@@ -31,4 +37,10 @@ class Home extends Component {
     }
 }
 
-export default Home;
+function mapStateToProps(state){
+    return{
+        loggedIn: state.loggedIn,
+    }
+}
+
+export default connect(mapStateToProps, {getUserInfo})(Home);

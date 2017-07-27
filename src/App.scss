@@ -191,6 +191,7 @@
     width: 100vw;
     background: #020806;
     color: white;
+    text-align: center;
   }
 
   .story-intro-hero {
@@ -205,9 +206,16 @@
   .otherworldstitle {
     width: 50vw;
     // left: 0;
-    margin-left: auto;
-    .there-these {
+    margin-left: 43vw;
+    .there-these1 {
       font-family: 'Meddon', cursive;
+      margin-left: -20vw;
+      margin-bottom: -4vh;
+    }
+    .there-these2 {
+      font-family: 'Meddon', cursive;
+      margin-right: -23vw;
+      margin-top: -4vh;
     }
 
     .other-worlds{
@@ -215,6 +223,9 @@
     }
   }
 
+  .story-start {
+    padding-bottom: 4vh;
+  }
 
   .story-body, .story-rules {
     margin-left: auto;
@@ -237,6 +248,9 @@
 // Team
 // /////////////////////////////////////////////////////////////////
 
+  .not-logged {
+      height: 100vh;
+    }
   .edit-team-container {
     text-align: center;
     background: $purple;
@@ -295,6 +309,10 @@
         margin-right: -74px;
       }
     }
+  }
+
+  .not-logged-edit {
+    height: 100vh;
   }
 
 // /////////////////////////////////////////////////////////////////
@@ -480,6 +498,20 @@
     }
   }
 
+  .cooldown-countdown {
+    display: none;
+    padding: 0;
+    margin: 0;
+  }
+  .on-cooldown{
+    border: 10px solid red;
+    padding: 0;
+    margin: 0;
+    .cooldown-countdown {
+      display: inline;
+    }
+  }
+
   .health-bar-myteam,
   .health-bar-badteam {
       width: 300px;
@@ -511,6 +543,7 @@
     background-size: contain;
     padding-top: 33vh;
     color: black;
+    z-index: 10;
   }
   .you-lose {
     background: url('./components/Story/Levels/lose.png') no-repeat;
@@ -522,6 +555,7 @@
     background-size: contain;
     padding-top: 33vh;
     color: black;
+    z-index: 10;
   }
 
 // /////////////////////////////////////////////////////////////////
