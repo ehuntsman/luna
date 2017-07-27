@@ -33,7 +33,7 @@ massive(config.connectionString).then((dbInstance) => {
         domain: config.domain,
         clientID: config.clientID,
         clientSecret: config.clientSecret,
-        callbackURL: 'http://localhost:3000/auth/callback',
+        callbackURL: config.auth0Callback,
         options: {
             theme: {
                 logo: 'https://s3-us-west-2.amazonaws.com/devschoolluna/logo-01.png',
@@ -59,7 +59,7 @@ massive(config.connectionString).then((dbInstance) => {
     app.get('/auth', passport.authenticate('auth0'));
 
     app.get('/auth/callback', passport.authenticate('auth0', {
-        successRedirect: 'http://localhost:3001/#myteam',
+        successRedirect: config.authRedirect,
         failureRedirect: '/'
     }));
 
