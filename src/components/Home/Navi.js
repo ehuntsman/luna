@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import config from './../../config.js';
 
 import {getUserInfo} from '../../ducks/reducer';
 
@@ -12,13 +11,13 @@ class Navi extends Component {
     render() {
         let amILogged = false;
         if(this.props.loggedIn){
-            amILogged = <a href={config.logOut}><li>log out {this.props.loggedIn.username}</li></a>
+            amILogged = <a href="http://localhost:3000/auth/logout"><li>log out {this.props.loggedIn.username}</li></a>
         }else{
-            amILogged = <a href={config.logIn}><li>log in</li></a>
+            amILogged = <a href="http://localhost:3000/auth"><li>log in</li></a>
         }
         return (
             <div className="main-header">
-
+                {/*if user is logged in*/}
                 <nav>
                     <ul>
                         <Link to="/"><li>home</li></Link>
