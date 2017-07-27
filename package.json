@@ -25,6 +25,9 @@
     "redux-promise-middleware": "^4.3.0",
     "redux-thunk": "^2.2.0"
   },
+  "engines": {
+    "node": "8.2.1"
+  },
   "devDependencies": {
     "express": "^4.15.3",
     "react-scripts": "1.0.10"
@@ -36,8 +39,13 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ],
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "index.js",
   "repository": {
