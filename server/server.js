@@ -97,7 +97,7 @@ massive(config.connectionString).then((dbInstance) => {
 
     app.get('/auth/logout', function (req, res) {
         req.logout();
-        res.redirect('http://localhost:3001/');
+        res.redirect(config.logoutredirect);
     })
 })
 
