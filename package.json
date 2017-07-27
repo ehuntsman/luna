@@ -52,6 +52,10 @@
     "type": "git",
     "url": "git+https://github.com/ehuntsman/luna.git"
   },
+  "devServer": {
+    "compress": true,
+    "disableHostCheck": true  // That solved it
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
