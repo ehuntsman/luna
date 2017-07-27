@@ -4,9 +4,6 @@ import {getOneCharacter} from '../../../ducks/reducer.js';
 import {Link} from 'react-router-dom';
 
 class CharacterShow extends Component {
-    constructor(props){
-        super(props);
-    }
     componentDidMount(){
         let tempid = this.props.match.params.id
         this.props.getOneCharacter(tempid);
@@ -15,11 +12,11 @@ class CharacterShow extends Component {
     render() {
         return (
             <div className="character-show-container">
-                <img src={this.props.selectedChar.imageurl} placeholder={this.props.selectedChar.name} />
+                <img src={this.props.selectedChar.imageurl} placeholder={this.props.selectedChar.name} alt={this.props.selectedChar.name} />
                 <div className="character-show-text">
                     <h1 className={this.props.selectedChar.color}>{this.props.selectedChar.name}</h1>
                     <p>Special Attack: {this.props.selectedChar.specialattackid}</p>
-                    <img src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${this.props.selectedChar.elementname}.png`}/>
+                    <img src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${this.props.selectedChar.elementname}.png`} alt={this.props.selectedChar.elementname}/>
                     <p>{this.props.selectedChar.description}</p>
                     <Link to='/myteam'>back to my team</Link>
                 </div>

@@ -4,7 +4,7 @@ import CurrentTeam from './CurrentTeam';
 import CharacterList from './CharacterList';
 import {Link} from 'react-router-dom';
 
-import {updateTeamName, getCharacters, getUserInfo} from '../../../ducks/reducer';
+import {updateTeamName, getCharacters, getUserInfo, updateCurrentTeam} from '../../../ducks/reducer';
 
 class TeamEdit extends Component {
     constructor(props){
@@ -13,6 +13,7 @@ class TeamEdit extends Component {
             userInput: ""
         }
         this.handleChange = this.handleChange.bind(this);
+        this.switchEmOut = this.switchEmOut.bind(this);
     }
     handleChange(val){
         this.setState({
@@ -23,14 +24,29 @@ class TeamEdit extends Component {
         this.setState({
             userInput: "",
         })
-        this.props.updateTeamName(user, name)
+        setTimeout(() => {
+            this.props.updateTeamName(user, name)
+        }, 1)
+    }
+    switchEmOut(a,b,c){
+        this.props.updateCurrentTeam(a,b,c)
     }
     componentDidMount() {
         this.props.getCharacters()
         this.props.getUserInfo()
     }
+    // componentDidUpdate(prevprops){
+    //     if(prevprops.loggedIn.teamname !== this.props.loggedIn.teamname){
+    //         setTimeout(() => {
+    //          this.props.getUserInfo()
+    //         },1)
+    //     }else{
+    //         console.log(prevprops,  "next props FAILLLLLLLL")
+    //     }
+    // }
 
     render() {
+        console.log(this.props.loggedIn.teamname, "this is the new teamname from state");
         if(this.props.loggedIn && this.props.loggedIn.username){
             return (
                 <div className="edit-team-container">
@@ -38,11 +54,10 @@ class TeamEdit extends Component {
                     <h1>{this.props.loggedIn.teamname}</h1>
                     <input type="text" onChange={(e)=>this.handleChange(e.target.value)} placeholder="change your teamname" value={this.state.userInput}/>
                     <button onClick={()=>this.updateTeamName(this.props.loggedIn, this.state.userInput)}>submit new team name</button>
-                    <CurrentTeam characters={this.props.characters} user={this.props.loggedIn} selectedChar={this.props.selectedChar}/>
+                    <CurrentTeam characters={this.props.characters} user={this.props.loggedIn} selectedChar={this.props.selectedChar} switchEmOut={this.switchEmOut}/>
                     <div className="button-container">
                         <Link to="/storymap"><button>Let's go fight!</button></Link>
                     </div>
-                    <button>save team</button>
                     <p>team should always be saved on clicks?</p>
                     <CharacterList characters={this.props.characters}/>
                 </div>
@@ -77,4 +92,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {updateTeamName, getCharacters, getUserInfo})(TeamEdit);
+export default connect(mapStateToProps, {updateTeamName, getCharacters, getUserInfo, updateCurrentTeam})(TeamEdit);

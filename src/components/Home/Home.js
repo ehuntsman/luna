@@ -8,7 +8,7 @@ class Home extends Component {
         return (
             <div className="home-page">
                 <div className="clouds-wrapper">
-                    <div class="cloud first">
+                    <div className="cloud first">
                         <img src={cloud} className="cloud1" alt="cloud" />
                         <img src={cloud} className="cloud2" alt="cloud" />
                     </div>

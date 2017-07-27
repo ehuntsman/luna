@@ -25,9 +25,9 @@ class CharacterList extends Component {
                 <p>if you click one of me, then one above, it will replce the one above</p>
                 <p>if a character is on your current team, then it will be greyed out/disabled on this list</p>
 
-                {this.props.characters.map( (element) => {
+                {this.props.characters.map( (element, index) => {
                     return(
-                        <div className="char-box" key={element.id}>
+                        <div className="char-box" key={index}>
                             <img src={element.imageurl} placeholder={element.name} alt={element.name} />
                             <div className="mini-info">
                                 <p><img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${element.elementname}.png`} alt="element" />

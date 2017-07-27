@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {updateCurrentTeam, getUserInfo} from '../../../ducks/reducer';
-import {connect} from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 
 class CurrentTeam extends Component {
     constructor(props){
@@ -9,11 +7,6 @@ class CurrentTeam extends Component {
         this.state = {
             defaultArray: [2,6,8,9,10]
         }
-        this.switchEmOut = this.switchEmOut.bind(this);
-    }
-    switchEmOut(a,b,c){
-        this.props.updateCurrentTeam(a,b,c)
-        // this.props.getUserInfo() 
     }
 
     render() {
@@ -27,8 +20,8 @@ class CurrentTeam extends Component {
                     }
                 }
             }
-            const url = `/api/progress/${this.props.user.id}`
-            const promise = axios.get(url).then(response => response.data);
+            // const url = `/api/progress/${this.props.user.id}`
+            // const promise = axios.get(url).then(response => response.data);
             let finalarray = chararray.map( (character, i) => {
                 return (
                     <div className="member" key={i}>
@@ -43,7 +36,7 @@ class CurrentTeam extends Component {
                         {
                             this.props.selectedChar.id
                         ?
-                            <button onClick={()=>this.switchEmOut(this.props.selectedChar.id, i, this.props.user)}>Switch with {this.props.selectedChar.name}</button>
+                            <button onClick={()=>this.props.switchEmOut(this.props.selectedChar.id, i, this.props.user)}>Switch with {this.props.selectedChar.name}</button>
                         :
                             <div></div>
                         }
@@ -88,4 +81,4 @@ class CurrentTeam extends Component {
     }
 }
 
-export default connect(null, {updateCurrentTeam, getUserInfo})(CurrentTeam);
+export default (CurrentTeam);

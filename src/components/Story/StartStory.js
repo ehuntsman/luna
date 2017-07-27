@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import header from './otherworldsheader.jpg';
 import rulesheader from './rulesheader.jpg';
 import {Link} from 'react-router-dom';
 

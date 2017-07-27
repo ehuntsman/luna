@@ -9,6 +9,7 @@ const Auth0Strategy = require('passport-auth0');
 const config = require('./secrets.js');
 const characters_controller = require('./controllers/characters_controller');
 const users_controller = require('./controllers/users_controller');
+const attacks_controller = require('./controllers/attacks_controller');
 const cookieParser = require('cookie-parser');
 
 const app = module.exports = express();
@@ -23,7 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
 
-// app.use(express.static(__dirname + '/../build'));
+app.use(express.static(__dirname + '/../build'));
 
 massive(config.connectionString).then((dbInstance) => {
     app.set('db', dbInstance);
@@ -43,12 +44,12 @@ massive(config.connectionString).then((dbInstance) => {
             }
         }
     }, function (accessToken, refreshToken, extraParams, profile, done) {
-        
+
         dbInstance.getUserByAuthId([profile.identities[0].user_id]).then((user) => {
             if (user[0]) {
                 return done(null, user[0]);
             } else {
-                dbInstance.create_user(profile.identities[0].user_id, profile.displayName).then( (user) => {
+                dbInstance.create_user(profile.identities[0].user_id, profile.displayName).then((user) => {
                     return done(null, user[0])
                 })
             }
@@ -67,7 +68,12 @@ massive(config.connectionString).then((dbInstance) => {
     });
 
     passport.deserializeUser(function (user, done) {
-        done(null, user);
+        console.log("des-start", user)
+        dbInstance.getUser(user.id).then(dbuser => {
+            let newUser =  dbuser.length > 0 ? dbuser[0] : {};
+            console.log("des-done",newUser)
+            done(null, newUser)
+        })
     });
 
     //users 
@@ -84,6 +90,9 @@ massive(config.connectionString).then((dbInstance) => {
     //characters
     app.get('/api/characters', characters_controller.getAllCharacters);
     app.get('/api/characters/:id', characters_controller.getOneCharacter);
+
+    //specialattacks
+    app.get('/api/specialattacks', attacks_controller.getAllAttacks);
 
 
     app.get('/auth/logout', function (req, res) {

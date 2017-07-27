@@ -23,7 +23,6 @@ module.exports = {
   },
 	updateTeamName: function(req,res,next){
 		const dbInstance = req.app.get('db');
-		console.log(req, "some console for the soul of the updateteamname", req.params.id);
 		dbInstance.update_teamname([req.body.name, req.params.id]).then( user => {
 			res.status(200).send(user)
 		}).catch( (err) => {
@@ -32,7 +31,6 @@ module.exports = {
 	},
 	update: function(req,res,next){
 		const dbInstance = req.app.get('db');
-		console.log(req.body, "this is the new team in my functions server")
 		dbInstance.update_user([req.body, req.params.id]).then( user => {
 			res.status(200).send(user)
 		}).catch( (err) => {

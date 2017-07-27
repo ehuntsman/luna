@@ -110,8 +110,6 @@
     right: 25vw;
     .home-links {
       button {
-        // background: linear-gradient(180deg, rgba(69,183,191,1) 0%,rgba(69,183,191,0.1) 100%);
-        // background: #D4BDA7;
         background: url('./components/Home/bluebutton.png');
         border: none;
         width: 241px;
@@ -257,7 +255,6 @@
       }
       h4 {
         font-family: 'Arima Madurai', sans-serif;
-        // background: rgba(255,255,255,0.75);
         color: white;
         font-size: 14px;
         z-index: 2;
@@ -300,10 +297,29 @@
     }
   }
 
+// /////////////////////////////////////////////////////////////////
+// Levels
+// /////////////////////////////////////////////////////////////////
+
   .level-one {
     background: url('./components/Story/Levels/levelgravityfalls.png') no-repeat;
     background-position: center;
     background-size: cover;
+  }
+  .attack-text-box {
+    position: fixed;
+    bottom: 3vh;
+    height: 5vh;
+    line-height: 5vh;
+    z-index: 5;
+    width: 100vw;
+    background: rgba(255,255,255,0.5);
+    color: $darkpurple;
+    margin: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) 25%,rgba(255,255,255,0.5) 75%,rgba(255,255,255,0) 100%);
+    #attack-text {
+      margin: 0;
+    }
   }
   .level-current-team {
     text-align: center;
@@ -312,37 +328,38 @@
     height: 90vh;
     overflow: hidden;
     width: 98vw;
-    .bad-team,
     .current-team-container {
-      width: 50%;
+      width: 56vw;
       padding: 0;
       display: inline-block;
       vertical-align: top;
     }
     h1 {
-      margin: 2vh auto -2vh auto;
+      margin: 2vh auto 1vh auto;
     }
-    .selected-char {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .selected-char img {
+      // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      // background: red;
+      background: radial-gradient(ellipse at center, rgba(169,3,41,1) 0%,rgba(151,95,108,0) 53%,rgba(142,142,142,0) 80%,rgba(109,0,25,0) 100%); 
     }
     .member0 .char-sprite {
-      margin-left: 0;
+      margin-left: -5vw;
     }
     .member1 .char-sprite {
-      margin-left: 8vw;
-      margin-top: -3.3vh;
+      margin-left: 5vw;
+      margin-top: -3vh;
     }
     .member2 .char-sprite{
-      margin-left: 16vw;
-      margin-top: -6.6vh;
+      margin-left: 15vw;
+      margin-top: -6vh;
     }
     .member3 .char-sprite{
-      margin-left: 8vw;
-      margin-top: -10vh;
+      margin-left: 5vw;
+      margin-top: -9vh;
     }
     .member4 .char-sprite{
-      margin-left: 0vw;
-      margin-top: -15vh;
+      margin-left: -5vw;
+      margin-top: -12vh;
     }
     .member {
       vertical-align: bottom;
@@ -352,6 +369,13 @@
         vertical-align: top;
         width: 15vw;
         display: inline-block;
+        button {
+          margin: 4px 0;
+          display: block;
+          width: 114px;
+          border: 0;
+          background: $blue;
+        }
       }
       .char-sprite {
         height: 25vh;
@@ -393,10 +417,11 @@
 
   .bad-team {
     text-align: center;
-    padding: 5vh 1vw;
     color: white;
     height: 100vh;
-    width: 98vw;
+    width: 39vw;
+    display: inline-block;
+    vertical-align: top;
     .selected-char {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
@@ -462,14 +487,41 @@
       margin-right: auto;
       margin: 0 auto 3vh auto;
       .outer-health-bar {
-        border: 1px solid #222;
+        background: url('./components/Story/Levels/hpbacker.png') repeat;
+        background-size: contain;
         width: 100%;
-        height: 20px;
+        height: 22px;
+        padding-top: 2px;
       }
       .inner-health-bar {
         background: #71A60F;
+        background: url('./components/Story/Levels/hpfront.png') repeat;
+        background-size: contain;
         height: 20px;
       }
+  }
+
+  .you-win {
+    background: url('./components/Story/Levels/win.png') no-repeat;
+    height: 41vw;
+    width: 52vw;
+    position: absolute;
+    top: 5vh;
+    left: 25vw;
+    background-size: contain;
+    padding-top: 33vh;
+    color: black;
+  }
+  .you-lose {
+    background: url('./components/Story/Levels/lose.png') no-repeat;
+    height: 41vw;
+    width: 52vw;
+    position: absolute;
+    top: 5vh;
+    left: 25vw;
+    background-size: contain;
+    padding-top: 33vh;
+    color: black;
   }
 
 // /////////////////////////////////////////////////////////////////
