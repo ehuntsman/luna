@@ -13,7 +13,7 @@ class Home extends Component {
     render() {
         let amILoggedIn = "";
         if(this.props.loggedIn){
-            amILoggedIn = <button>Continue</button>
+            amILoggedIn = <Link to="/myteam"><button>Continue</button></Link>
         }else{
             amILoggedIn = <Link to="/start" id="new-story-button"><button>Start a New Quest</button></Link>
         }
