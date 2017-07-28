@@ -142,22 +142,33 @@ button {
   height: 50vh;
   padding-top: 10vh; }
 
-.otherworldstitle {
-  width: 50vw;
-  margin-left: 43vw; }
-  .otherworldstitle .there-these1 {
-    font-family: 'Meddon', cursive;
-    margin-left: -20vw;
-    margin-bottom: -4vh; }
-  .otherworldstitle .there-these2 {
-    font-family: 'Meddon', cursive;
-    margin-right: -23vw;
-    margin-top: -4vh; }
-  .otherworldstitle .other-worlds {
-    font-family: 'Metamorphous', cursive; }
+.otherworldstitle .there-these1 {
+  font-family: 'Meddon', cursive;
+  margin-left: -20vw;
+  margin-bottom: -4vh; }
+
+.otherworldstitle .there-these2 {
+  font-family: 'Meddon', cursive;
+  margin-right: -23vw;
+  margin-top: -4vh; }
+
+.otherworldstitle .other-worlds {
+  font-family: 'Metamorphous', cursive; }
 
 .story-start {
-  padding-bottom: 4vh; }
+  padding-bottom: 10vh; }
+
+.story-rules-image {
+  -webkit-clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
+  clip-path: polygon(0 13%, 1600px 0, 1600px 87%, 0 100%);
+  background: url("./components/Home/biker.jpg") no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  height: 20vh;
+  padding-top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px; }
 
 .story-body, .story-rules {
   margin-left: auto;
@@ -166,6 +177,22 @@ button {
   text-align: center; }
   .story-body img, .story-rules img {
     max-width: 100%; }
+  .story-body ul, .story-rules ul {
+    text-decoration: none;
+    list-style-type: none; }
+
+.story-start-image {
+  -webkit-clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
+  clip-path: polygon(0 13%, 1600px 0, 1600px 87%, 0 100%);
+  background: url("./components/Home/biker.jpg") no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  height: 20vh;
+  padding-top: 10vh;
+  margin-top: 3vh;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px; }
 
 .storyMap {
   background: #e2e2e2;
@@ -266,31 +293,25 @@ button {
     margin: 2vh auto 1vh auto; }
   .level-current-team .selected-char img {
     background: radial-gradient(ellipse at center, #a90329 0%, rgba(151, 95, 108, 0) 53%, rgba(142, 142, 142, 0) 80%, rgba(109, 0, 25, 0) 100%); }
+  .level-current-team .char-sprite .on-cooldown {
+    top: 0;
+    left: 31px;
+    position: absolute; }
   .level-current-team .member0 .char-sprite {
     margin-left: 10vw;
     margin-top: -13vh; }
-    .level-current-team .member0 .char-sprite .on-cooldown {
-      right: 12vw; }
   .level-current-team .member1 .char-sprite {
     margin-left: 22vw;
     margin-top: -16vh; }
-    .level-current-team .member1 .char-sprite .on-cooldown {
-      right: 7vw; }
   .level-current-team .member2 .char-sprite {
     margin-left: 34vw;
     margin-top: -19vh; }
-    .level-current-team .member2 .char-sprite .on-cooldown {
-      right: 1vw; }
   .level-current-team .member3 .char-sprite {
     margin-left: 22vw;
     margin-top: -22vh; }
-    .level-current-team .member3 .char-sprite .on-cooldown {
-      right: 7vw; }
   .level-current-team .member4 .char-sprite {
     margin-left: 10vw;
     margin-top: -26vh; }
-    .level-current-team .member4 .char-sprite .on-cooldown {
-      right: 12vw; }
   .level-current-team .member {
     vertical-align: bottom;
     text-align: left;
@@ -306,7 +327,8 @@ button {
         border: 0;
         background: #1A688A; }
     .level-current-team .member .char-sprite {
-      height: 25vh; }
+      height: 25vh;
+      position: relative; }
       .level-current-team .member .char-sprite img {
         height: 25vh; }
         .level-current-team .member .char-sprite img:after {
@@ -401,11 +423,7 @@ button {
 
 .on-cooldown {
   padding: 9vh 3vw;
-  position: relative;
   text-align: center;
-  display: block;
-  top: -27vh;
-  vertical-align: top;
   width: 100px;
   background: rgba(0, 0, 0, 0.75);
   background: radial-gradient(ellipse at center, black 0%, black 15%, rgba(0, 0, 0, 0.71) 41%, transparent 68%, transparent 100%);

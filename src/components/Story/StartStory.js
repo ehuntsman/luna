@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import rulesheader from './rulesheader.jpg';
 import {Link} from 'react-router-dom';
 import config from './../../config.js';
 
@@ -25,13 +24,16 @@ class StartStory extends Component {
                     <p>Find the Luna first.</p>
                     <h3>Good Luck</h3>
                 </div>
+                <div className="story-rules-image">
+                </div>
                 <div className="story-rules">
-                    <img src={rulesheader} alt="rules"/>
                     <h1>Notes for Playing</h1>
                     <ul>
                         <li>Special Attacks are powerful, but come with a cooldown</li>
                         <li>Beware of elements and how they effect eachother</li>
                     </ul>
+                </div>
+                <div className="story-start-image">
                 </div>
                 <div className="story-start">
                     <h1>Dying to play?</h1>
