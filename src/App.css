@@ -267,19 +267,30 @@ button {
   .level-current-team .selected-char img {
     background: radial-gradient(ellipse at center, #a90329 0%, rgba(151, 95, 108, 0) 53%, rgba(142, 142, 142, 0) 80%, rgba(109, 0, 25, 0) 100%); }
   .level-current-team .member0 .char-sprite {
-    margin-left: -5vw; }
+    margin-left: 10vw;
+    margin-top: -13vh; }
+    .level-current-team .member0 .char-sprite .on-cooldown {
+      right: 12vw; }
   .level-current-team .member1 .char-sprite {
-    margin-left: 5vw;
-    margin-top: -3vh; }
+    margin-left: 22vw;
+    margin-top: -16vh; }
+    .level-current-team .member1 .char-sprite .on-cooldown {
+      right: 7vw; }
   .level-current-team .member2 .char-sprite {
-    margin-left: 15vw;
-    margin-top: -6vh; }
+    margin-left: 34vw;
+    margin-top: -19vh; }
+    .level-current-team .member2 .char-sprite .on-cooldown {
+      right: 1vw; }
   .level-current-team .member3 .char-sprite {
-    margin-left: 5vw;
-    margin-top: -9vh; }
+    margin-left: 22vw;
+    margin-top: -22vh; }
+    .level-current-team .member3 .char-sprite .on-cooldown {
+      right: 7vw; }
   .level-current-team .member4 .char-sprite {
-    margin-left: -5vw;
-    margin-top: -12vh; }
+    margin-left: 10vw;
+    margin-top: -26vh; }
+    .level-current-team .member4 .char-sprite .on-cooldown {
+      right: 12vw; }
   .level-current-team .member {
     vertical-align: bottom;
     text-align: left;
@@ -296,6 +307,12 @@ button {
         background: #1A688A; }
     .level-current-team .member .char-sprite {
       height: 25vh; }
+      .level-current-team .member .char-sprite img {
+        height: 25vh; }
+        .level-current-team .member .char-sprite img:after {
+          background: rgba(0, 0, 0, 0.5);
+          height: 2vh;
+          width: 3vw; }
     .level-current-team .member h4 {
       background: #9377A5;
       background: rgba(49, 43, 86, 0.25);
@@ -348,8 +365,6 @@ button {
       vertical-align: top;
       width: 15vw;
       display: inline-block; }
-    .bad-team .member .char-sprite {
-      height: 25vh; }
     .bad-team .member h4 {
       background: #9377A5;
       background: rgba(49, 43, 86, 0.25);
@@ -385,11 +400,18 @@ button {
   margin: 0; }
 
 .on-cooldown {
-  border: 10px solid red;
-  padding: 0;
-  margin: 0; }
-  .on-cooldown .cooldown-countdown {
-    display: inline; }
+  padding: 9vh 3vw;
+  position: relative;
+  text-align: center;
+  display: block;
+  top: -27vh;
+  vertical-align: top;
+  width: 100px;
+  background: rgba(0, 0, 0, 0.75);
+  background: radial-gradient(ellipse at center, black 0%, black 15%, rgba(0, 0, 0, 0.71) 41%, transparent 68%, transparent 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ }
+  .on-cooldown h1 {
+    margin: 0; }
 
 .health-bar-myteam,
 .health-bar-badteam {

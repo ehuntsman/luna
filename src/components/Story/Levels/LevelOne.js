@@ -135,6 +135,11 @@ class LevelOne extends Component {
         );
         //calc attack power
         let newcd = this.state.cooldown.slice(0);
+        for(var i = 0; i < newcd.length; i++){
+            if(newcd[i] > 0){
+                newcd[i]--
+            }
+        }
         newcd[index] = charSpecAttack.cooldown;
         if(this.state.badHealth - charSpecAttack.baseattack > 0){
             this.setState({
@@ -330,26 +335,26 @@ class LevelOne extends Component {
                                         </div>
                                         <button 
                                             onClick={(e) => this.handleSelection(char)}
-                                            className={this.state.disabled || this.state.gameOver ? "disabled-button" : null}
-                                            disabled={this.state.disabled || this.state.gameOver ? true : false}>
+                                            className={this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? "disabled-button" : null}
+                                            disabled={this.state.disabled || this.state.gameOver  || this.state.cooldown[index] > 0 ? true : false}>
                                             {this.state.selectedChar.name === char.name ? "deselect" : "attack!"}
                                         </button>
                                         <button 
                                             onClick={(e) => this.specialAttackGood(char, index)}
-                                            className={this.state.selectedChar.name === char.name || this.state.disabled || this.state.gameOver ? "disabled-button" : null}
-                                            disabled={this.state.selectedChar.name === char.name  || this.state.disabled || this.state.gameOver ? true : false}>
+                                            className={this.state.selectedChar.name === char.name || this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? "disabled-button" : null}
+                                            disabled={this.state.selectedChar.name === char.name  || this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? true : false}>
                                             special attack
                                         </button>
                                     </div>
 
-                                    <sprite>
+                                    <div className="char-sprite">
+                                        <img src={char.imageurl} placeholder={char.name} onClick={(e) => this.handleSelection(char)} alt={char.name}/>
                                         { this.state.cooldown[index] > 0 ?
                                             <h1 className="on-cooldown">{this.state.cooldown[index]}</h1>
                                         :
-                                        null
+                                            <h1></h1>
                                         }
-                                        <img src={char.imageurl} placeholder={char.name} onClick={(e) => this.handleSelection(char)} className="char-sprite" alt={char.name}/>
-                                    </sprite>
+                                    </div>
                                 </div>
                             )
                         })}
