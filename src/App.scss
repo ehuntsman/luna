@@ -388,7 +388,7 @@
     }
     .char-sprite .on-cooldown {
       top: 0;
-      left: 31px;
+      left: 0;
       position: absolute;
     }
     .member0 .char-sprite {
@@ -573,29 +573,63 @@
       }
   }
 
+  .special-attack-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.15);
+    z-index: 5;
+    margin-left: -100vw;
+    img {
+      height: 30vh;
+      margin-left: -50vw;
+      position: fixed;
+      top: 30vh;
+      z-index: 11;
+    }
+  }
+
   .you-win {
     background: url('./components/Story/Levels/win.png') no-repeat;
     height: 41vw;
     width: 52vw;
     position: absolute;
-    top: 5vh;
+    top:26vh;
     left: 25vw;
     background-size: contain;
     padding-top: 33vh;
     color: black;
     z-index: 10;
+    button{
+      padding: 12px 20px;
+      margin: 0 15px;
+      font-size: 19px;
+      color: #fff;
+    }
   }
   .you-lose {
     background: url('./components/Story/Levels/lose.png') no-repeat;
     height: 41vw;
     width: 52vw;
     position: absolute;
-    top: 5vh;
+    top: 26vh;
     left: 25vw;
     background-size: contain;
     padding-top: 33vh;
     color: black;
     z-index: 10;
+  }
+  .game-over {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background: rgba(0,0,0,0.71);
+    .current-team-container,
+    .attack-text-box {
+      display: none;
+    }
   }
 
 // /////////////////////////////////////////////////////////////////
@@ -611,10 +645,11 @@
       background: $lighttan;
       padding: 6px;
       width: 22.25vw;
-      height: 138px;
+      height: 100px;
       margin: 0.5vw;
       box-sizing: border-box;
       border: 2px solid $darktan;
+      vertical-align: top;
       button {
         margin: 10px 0 0 10px;
         display: inline-block;

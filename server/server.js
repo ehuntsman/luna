@@ -101,6 +101,6 @@ massive(config.connectionString).then((dbInstance) => {
     })
 })
 
-const port = 3000;
+const port = config.port;
 //this is the port that the site comes out in
 app.listen(port, () => { console.log(`Server listening on port ${port}.`); });

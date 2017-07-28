@@ -112,13 +112,44 @@ class LevelOne extends Component {
         let attackText = char.name + " used " + charSpecAttack.name;
         $("#attack-text").text(attackText).delay(2000);
         //animation - needs to be cooler!!!!! Maybe swipe the card across the sceen????
-        $('.selected-char .char-sprite').animate(
+        
+        $('.special-attack-container').animate(
             {
-                'margin-left': '-=30px'
+                'margin-left': '0vw'
             },
             100,
             'swing'
         );
+
+        $('#' + char.id).stop().animate(
+            {'margin-left': '0vw','opacity': '1'},100,
+            function(){$(this).animate(
+                {'margin-left': '+40vw'}, 1000,
+                    function(){$(this).animate(
+                        {'margin-left': '+100vw'}, 1000,
+                            function(){$(this).animate(
+                                {'margin-left': '100vw'}, 1000,
+                                    function(){$(this).animate(
+                                        {'opacity': '0'}, 1,
+                                            function(){$(this).animate(
+                                                {'margin-left': '-100vw'},1,
+                                                    function(){
+                                                        $('.special-attack-container').animate(
+                                                            {'margin-left': '-100vw'}, 100, 'swing'
+                                                        );
+                                                    }
+                                                )
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        );
+
         $('.selected-char .char-sprite').animate(
             {
                 'margin-left': '+=45px'
@@ -157,7 +188,7 @@ class LevelOne extends Component {
             })
         };
         // then have the villians attack here
-        setTimeout(this.attackGood, 1000);
+        setTimeout(this.attackGood, 4000);
     }
     attackGood() {
         //good animation
@@ -310,7 +341,7 @@ class LevelOne extends Component {
             let badHealthPercent = this.state.badHealth/badTotalHealth*100
             let goodHealthPercent = this.state.myHealth/myTotalHealth*100
             return (
-                <div className="level-current-team level-one">
+                <div className={this.state.gameOver ? "game-over level-current-team level-one" : "level-current-team level-one"}>
                     <h1>level one</h1>
                     <div className="attack-text-box">
                         <h1 id="attack-text">Select a character to start an attack</h1>
@@ -345,6 +376,9 @@ class LevelOne extends Component {
                                             disabled={this.state.selectedChar.name === char.name  || this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? true : false}>
                                             special attack
                                         </button>
+                                        <div className="special-attack-container">
+                                            <img src={char.framed} alt={char.name} id={char.id} />
+                                        </div>
                                     </div>
 
                                     <div className="char-sprite">
@@ -366,13 +400,11 @@ class LevelOne extends Component {
                                 ? 
                                 this.state.badHealth <= 0 ? 
                                     <div className="you-win">
-                                        <p>You defeated the bad guys. Good job!</p>
                                         <Link to="/storymap"><button>next</button></Link>
                                         <Link to="/myteam"><button>return to my team</button></Link>
                                     </div>
                                     :
                                     <div className="you-lose">
-                                        <p>You failed, and now they rule the world.</p>
                                         <Link to="/storymap"><button>try again</button></Link>
                                         <Link to="/myteam"><button>return to my team</button></Link>
                                     </div>
