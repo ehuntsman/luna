@@ -41,7 +41,6 @@ class TeamEdit extends Component {
         if(this.props.loggedIn && this.props.loggedIn.username){
             return (
                 <div className="edit-team-container">
-                    <p>logged {this.props.loggedIn.username}</p>
                     <h1>{this.props.loggedIn.teamname}</h1>
                     <input type="text" onChange={(e)=>this.handleChange(e.target.value)} placeholder="change your teamname" value={this.state.userInput}/>
                     <button onClick={()=>this.updateTeamName(this.props.loggedIn, this.state.userInput)}>submit new team name</button>
@@ -49,7 +48,6 @@ class TeamEdit extends Component {
                     <div className="button-container">
                         <Link to="/storymap"><button>Let's go fight!</button></Link>
                     </div>
-                    <p>team should always be saved on clicks?</p>
                     <CharacterList characters={this.props.characters}/>
                 </div>
             );

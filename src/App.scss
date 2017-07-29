@@ -266,11 +266,93 @@
     max-width: 1200px;
   }
 
+  .map {
+    width: 859px;
+    max-width: 100vw;
+    height: 292px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -170px;
+    @media screen and (max-width: 861px){
+      margin-top: 13px;
+    }
+  }
   .storyMap {
     background: #e2e2e2;
     height: 100vh;
     padding-top: 50px;
     text-align: center;
+    img {
+      max-width: 100vw;
+    }
+    ul li {
+      display: inline;
+      margin: 0 10px;
+    }
+    .link-level-one {
+      height: 77px;
+      width: 139px;
+      position: relative;
+      top: 188px;
+      left: 41px;
+      @media screen and (max-width: 861px){
+        display: none;
+      }
+    }
+    .link-level-two {
+      height: 77px;
+      width: 118px;
+      position: relative;
+      top: 224px;
+      left: 144px;
+      @media screen and (max-width: 861px){
+        display: none;
+      }
+    }
+    .map-marker {
+      height: 30px;
+      width: 30px;
+      background: red;
+      border-radius: 50%;
+      position: relative;
+      top: 228px;
+      left: 117px;
+      border-radius: 50% 50% 50% 0;
+      background: $teal;
+      transform: rotate(-45deg);
+      animation-name: bounce;
+      animation-fill-mode: both;
+      animation-duration: 1s;
+      margin: -20px 0 0 -20px;
+      &:after {
+        content: '';
+        width: 14px;
+        height: 14px;
+        margin: 8px 0 0 -7px;
+        background: #2F2F2F;
+        position: absolute;
+        border-radius: 50%;
+      }
+      @media screen and (max-width: 861px){
+        display: none;
+      }
+      @keyframes bounce {
+        0% {
+          opacity: 0;
+          transform: translateY(-2000px) rotate(-45deg);
+        }
+        60%{
+          opacity: 1;
+          transform: translateY(30px) rotate(-45deg);
+        }
+        80%{
+          transform: translateY(-10px) rotate(-45deg);
+        }
+        100%{
+          transform: translateY(0) rotate(-45deg);
+        }
+      }
+    }
   }
 
 // /////////////////////////////////////////////////////////////////
@@ -353,6 +435,11 @@
     background-position: center;
     background-size: cover;
   }
+  .level-two {
+    background: url('./components/Story/Levels/levelstevenuniverse.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
   .attack-text-box {
     position: fixed;
     bottom: 3vh;
@@ -420,10 +507,13 @@
       height: 14vh;
       .char-data-attack {
         vertical-align: top;
-        width: 15vw;
+        min-width: 134px;
         display: inline-block;
+        background: $purple;
+        background: rgba(49,43,86,0.25);
+        background: radial-gradient(ellipse at center, rgba(49,43,86,0.25) 0%,rgba(49,43,86,0.75) 100%);
         button {
-          margin: 4px 0;
+          margin: 4px 9px;
           display: block;
           width: 114px;
           border: 0;
@@ -501,13 +591,13 @@
       height: 28vh;
       .char-data-attack {
         vertical-align: top;
-        width: 15vw;
+        min-width: 134px;
         display: inline-block;
-      }
-      h4 {
         background: $purple;
         background: rgba(49,43,86,0.25);
         background: radial-gradient(ellipse at center, rgba(49,43,86,0.25) 0%,rgba(49,43,86,0.75) 100%);
+      }
+      h4 {
         font-size: 15px;
         padding: 6px 5px 5px 8px;
         line-height: 15px;
@@ -705,7 +795,7 @@
       background: $lighttan;
       padding: 6px;
       width: 22.25vw;
-      height: 100px;
+      height: 107px;
       margin: 0.5vw;
       box-sizing: border-box;
       border: 2px solid $darktan;

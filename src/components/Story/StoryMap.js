@@ -7,9 +7,16 @@ class Map extends Component {
         return (
             <div className="storyMap">
                 <h1>Map of Story!</h1>
-                <img src={mapPic} alt="map" />
-                <Link to="storymap/level/1"><p>level one</p></Link>
-                <p>level two</p>
+                <ul>
+                    <li><Link to="storymap/level/1">level one</Link></li>
+                    <li><Link to="storymap/level/2">level two</Link></li>
+                </ul>
+                <div className="map">
+                    <div className="map-marker"></div>
+                    <Link to="storymap/level/1"><div className="link-level-one"></div></Link>
+                    <Link to="storymap/level/2"><div className="link-level-two"></div></Link>
+                    <img src={mapPic} alt="map" />
+                </div>
             </div>
         );
     }

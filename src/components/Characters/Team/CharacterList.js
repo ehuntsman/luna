@@ -21,10 +21,8 @@ class CharacterList extends Component {
     render() {
         return (
             <div className="all-characters-container">
-                <h1>character list component</h1>
-                <p>if you click one of me, then one above, it will replce the one above</p>
-                <p>if a character is on your current team, then it will be greyed out/disabled on this list</p>
-
+                <h1>All Available Characters</h1>
+                <p>Go ahead, switch some out</p>
                 {this.props.characters.map( (element, index) => {
                     return(
                         <div className="char-box" key={index}>

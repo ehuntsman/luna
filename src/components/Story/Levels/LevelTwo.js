@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 import {getSpecialAttacks, getCharacters, getUserInfo} from '../../../ducks/reducer';
 
-class LevelOne extends Component {
+class LevelTwo extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -20,22 +20,22 @@ class LevelOne extends Component {
             gameOver: false,
             badChar: [
                 {
-                    id: 501,
-                    name: "Bill Cipher",
-                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/billcipher.png",
-                    specialattackid: 3,
-                    elementid: 3,
+                    id: 503,
+                    name: "Peridot",
+                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/peridot.png",
+                    specialattackid: 6,
+                    elementid: 7,
                     level: 1,
-                    elementname: "ghost"
+                    elementname: "moon"
                 },
                 {
-                    id: 502,
-                    name: "Gideon",
-                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/gideon.png",
-                    specialattackid: 2,
-                    elementid: 5,
+                    id: 504,
+                    name: "Lapis",
+                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/lapis.png",
+                    specialattackid: 6,
+                    elementid: 1,
                     level: 1,
-                    elementname: "lightning"
+                    elementname: "water"
                 }
             ],
             myteam: {},
@@ -347,8 +347,8 @@ class LevelOne extends Component {
             let badHealthPercent = this.state.badHealth/badTotalHealth*100
             let goodHealthPercent = this.state.myHealth/myTotalHealth*100
             return (
-                <div className={this.state.gameOver ? "game-over level-current-team level-one" : "level-current-team level-one"}>
-                    <h1>level one</h1>
+                <div className={this.state.gameOver ? "game-over level-current-team level-two" : "level-current-team level-two"}>
+                    <h1>level two</h1>
                     <div className="attack-text-box">
                         <h1 id="attack-text">Select a character to start an attack</h1>
                     </div>
@@ -453,7 +453,7 @@ class LevelOne extends Component {
             );
         }else{
             return (
-                <div className="level-current-team level-one">
+                <div className="level-current-team level-two">
                     Sign in to create a team and fight
                 </div>
             );
@@ -473,4 +473,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo})(LevelOne);
+export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo})(LevelTwo);
