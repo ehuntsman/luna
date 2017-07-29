@@ -113,30 +113,34 @@ class LevelOne extends Component {
         $("#attack-text").text(attackText).delay(2000);
         //animation - needs to be cooler!!!!! Maybe swipe the card across the sceen????
         
-        $('.special-attack-container').animate(
+        $('.special-attack-container').stop().animate(
             {
-                'margin-left': '0vw'
+                'left': '0vw'
             },
             100,
             'swing'
         );
 
         $('#' + char.id).stop().animate(
-            {'margin-left': '0vw','opacity': '1'},100,
+            {'left': '0vw','opacity': '1'},100,
             function(){$(this).animate(
-                {'margin-left': '+40vw'}, 1000,
+                {'left': '+40vw'}, 200,
                     function(){$(this).animate(
-                        {'margin-left': '+100vw'}, 1000,
-                            function(){$(this).animate(
-                                {'margin-left': '100vw'}, 1000,
+                        {'left': '40vw'},500,
+                        function(){$(this).animate(
+                                {'left': '+100vw'}, 200,
                                     function(){$(this).animate(
-                                        {'opacity': '0'}, 1,
+                                        {'left': '100vw'}, 500,
                                             function(){$(this).animate(
-                                                {'margin-left': '-100vw'},1,
-                                                    function(){
-                                                        $('.special-attack-container').animate(
-                                                            {'margin-left': '-100vw'}, 100, 'swing'
-                                                        );
+                                                {'opacity': '0'}, 1,
+                                                    function(){$(this).animate(
+                                                        {'left': '-100vw'},1,
+                                                            function(){
+                                                                $('.special-attack-container').animate(
+                                                                    {'left': '-100vw'}, 100, 'swing'
+                                                                );
+                                                            }
+                                                        )
                                                     }
                                                 )
                                             }
@@ -188,7 +192,7 @@ class LevelOne extends Component {
             })
         };
         // then have the villians attack here
-        setTimeout(this.attackGood, 4000);
+        setTimeout(this.attackGood, 2000);
     }
     attackGood() {
         //good animation
@@ -376,9 +380,6 @@ class LevelOne extends Component {
                                             disabled={this.state.selectedChar.name === char.name  || this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? true : false}>
                                             special attack
                                         </button>
-                                        <div className="special-attack-container">
-                                            <img src={char.framed} alt={char.name} id={char.id} />
-                                        </div>
                                     </div>
 
                                     <div className="char-sprite">
@@ -388,6 +389,13 @@ class LevelOne extends Component {
                                         :
                                             <h1></h1>
                                         }
+                                    </div>
+                                    <div className="special-attack-container">
+                                        <div className="gradient1">
+                                        </div>
+                                        <img src={char.framed} alt={char.name} id={char.id} />
+                                        <div className="gradient2">
+                                        </div>
                                     </div>
                                 </div>
                             )
