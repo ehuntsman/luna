@@ -29,6 +29,15 @@ module.exports = {
 			res.status(500).send(err)
 		})
 	},
+	updateStorypoint: function(req,res,next){
+		const dbInstance = req.app.get('db');
+		console.log(req.body, "this is a lot of stuff here for the body", req.params.id)
+		dbInstance.update_storypoint([req.body.storypoint, req.params.id]).then( user => {
+			res.status(200).send(user)
+		}).catch( (err) => {
+			res.status(500).send(err)
+		})
+	},
 	update: function(req,res,next){
 		const dbInstance = req.app.get('db');
 		dbInstance.update_user([req.body, req.params.id]).then( user => {

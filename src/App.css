@@ -35,10 +35,6 @@ ul {
     .main-header a:hover {
       color: #fff; }
 
-.disabled-button {
-  background: #535556;
-  color: #373B3E; }
-
 .button-spacer {
   height: 27px;
   width: 10px;
@@ -52,6 +48,17 @@ button {
   border-radius: 5px;
   padding: 5px 10px;
   font-family: 'IM Fell French Canon', serif; }
+
+.disabled-button {
+  background: #535556;
+  color: #373B3E;
+  font-size: 13px;
+  padding-top: 2px;
+  padding-bottom: 0;
+  font-family: 'Arima Madurai', sans-serif; }
+
+.disabled {
+  cursor: default; }
 
 .home-page {
   text-align: center;
@@ -202,7 +209,7 @@ button {
   height: 292px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -170px; }
+  margin-top: -221px; }
   @media screen and (max-width: 861px) {
     .map {
       margin-top: 13px; } }
@@ -221,19 +228,28 @@ button {
     height: 77px;
     width: 139px;
     position: relative;
-    top: 188px;
+    top: 272px;
     left: 41px; }
     @media screen and (max-width: 861px) {
       .storyMap .link-level-one {
         display: none; } }
   .storyMap .link-level-two {
     height: 77px;
-    width: 118px;
+    width: 117px;
     position: relative;
-    top: 224px;
+    top: 293px;
     left: 144px; }
     @media screen and (max-width: 861px) {
       .storyMap .link-level-two {
+        display: none; } }
+  .storyMap .link-level-three {
+    height: 77px;
+    width: 93px;
+    position: relative;
+    top: 130px;
+    left: 270px; }
+    @media screen and (max-width: 861px) {
+      .storyMap .link-level-three {
         display: none; } }
   .storyMap .map-marker {
     height: 30px;
@@ -241,7 +257,7 @@ button {
     background: red;
     border-radius: 50%;
     position: relative;
-    top: 228px;
+    top: 279px;
     left: 117px;
     border-radius: 50% 50% 50% 0;
     background: #3DCAC2;
@@ -342,6 +358,11 @@ button {
   background-position: center;
   background-size: cover; }
 
+.level-three {
+  background: url("./components/Story/Levels/leveldoctorwho.jpg") no-repeat;
+  background-position: center;
+  background-size: cover; }
+
 .attack-text-box {
   position: fixed;
   bottom: 3vh;
@@ -364,7 +385,7 @@ button {
   overflow: hidden;
   width: 98vw; }
   .level-current-team .current-team-container {
-    width: 56vw;
+    width: 58vw;
     padding: 0;
     display: inline-block;
     vertical-align: top; }
@@ -377,19 +398,19 @@ button {
     left: 0;
     position: absolute; }
   .level-current-team .member0 .char-sprite {
-    margin-left: 10vw;
+    margin-left: 14vw;
     margin-top: -13vh; }
   .level-current-team .member1 .char-sprite {
-    margin-left: 22vw;
+    margin-left: 26vw;
     margin-top: -16vh; }
   .level-current-team .member2 .char-sprite {
-    margin-left: 34vw;
+    margin-left: 36vw;
     margin-top: -19vh; }
   .level-current-team .member3 .char-sprite {
-    margin-left: 22vw;
+    margin-left: 26vw;
     margin-top: -22vh; }
   .level-current-team .member4 .char-sprite {
-    margin-left: 10vw;
+    margin-left: 14vw;
     margin-top: -26vh; }
   .level-current-team .member {
     vertical-align: bottom;
@@ -450,7 +471,7 @@ button {
   text-align: center;
   color: white;
   height: 100vh;
-  width: 39vw;
+  width: 37vw;
   display: inline-block;
   vertical-align: top; }
   .bad-team .selected-char {

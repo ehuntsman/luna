@@ -68,10 +68,8 @@ massive(config.connectionString).then((dbInstance) => {
     });
 
     passport.deserializeUser(function (user, done) {
-        console.log("des-start", user)
         dbInstance.getUser(user.id).then(dbuser => {
             let newUser =  dbuser.length > 0 ? dbuser[0] : {};
-            console.log("des-done",newUser)
             done(null, newUser)
         })
     });
@@ -84,6 +82,7 @@ massive(config.connectionString).then((dbInstance) => {
 
     app.put('/api/user/:id', users_controller.update);
     app.put('/api/user/teamname/:id/', users_controller.updateTeamName)
+    app.put('/api/user/storypoint/:id/', users_controller.updateStorypoint)
 
     app.post('/api/progress', users_controller.postProgress)
 

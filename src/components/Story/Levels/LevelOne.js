@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import $ from 'jquery';
 import {Link} from 'react-router-dom';
 
-import {getSpecialAttacks, getCharacters, getUserInfo} from '../../../ducks/reducer';
+import {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint} from '../../../ducks/reducer';
 
 class LevelOne extends Component {
     constructor(props){
@@ -47,6 +47,7 @@ class LevelOne extends Component {
         this.attackGood = this.attackGood.bind(this);
         this.resetText = this.resetText.bind(this);
         this.specialAttackGood = this.specialAttackGood.bind(this);
+        this.updateLevel = this.updateLevel.bind(this);
     }
 
     componentDidMount(){
@@ -89,6 +90,11 @@ class LevelOne extends Component {
             this.setState({
                 selectedChar: character
             })
+        }
+    }
+    updateLevel(user){
+        if(user.storypoint == 1){
+            this.props.updateStorypoint(user);
         }
     }
     resetText(){
@@ -186,6 +192,7 @@ class LevelOne extends Component {
                 cooldown: newcd
             })
         }else{
+            this.updateLevel(this.props.loggedIn);
             this.setState({
                 badHealth: this.state.badHealth - charSpecAttack.baseattack,
                 gameOver: true,
@@ -205,18 +212,23 @@ class LevelOne extends Component {
         };
         let randomBaddie = getRandomInt(0, this.state.badTeam.length);
         let randomGoodie = getRandomInt(0, 5);
+        console.log("random goodie roll", randomGoodie)
+        console.log("this is my state team", this.state.myteam);
         randomBaddie = this.state.badChar[randomBaddie];
         randomGoodie = this.state.myteam[randomGoodie];
+        console.log("random goodie guy". randomGoodie);
 
         this.setState({
             selectedChar: randomBaddie
         });
         //text
-        let attackText = randomBaddie.name + " attacked " + randomGoodie.name
+        if(randomGoodie){
+            let attackText = randomBaddie.name + " attacked " + randomGoodie.name
+            $("#attack-text").text(attackText).delay(4000);
+        };
         // $("#attack-text").text(attackText).animate({
         //     'margin-left': '+=100vw'
         // }).delay(4000);
-        $("#attack-text").text(attackText).delay(4000);
         //animation
         $('.selected-char .char-sprite').animate(
             {
@@ -256,6 +268,7 @@ class LevelOne extends Component {
             });
             setTimeout(this.resetText, 2000);
         }else{
+            this.updateLevel(this.props.loggedIn);
             this.setState({
                 myHealth: this.state.myHealth - attackPwr,
                 selectedChar: {},
@@ -317,6 +330,7 @@ class LevelOne extends Component {
                 cooldown: newcd
             })
         }else{
+            this.updateLevel(this.props.loggedIn);
             this.setState({
                 badHealth: this.state.badHealth - attackPwr,
                 gameOver: true,
@@ -372,25 +386,20 @@ class LevelOne extends Component {
                                         </div>
                                         <button 
                                             onClick={(e) => this.handleSelection(char)}
-                                            className={this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? "disabled-button" : null}
-                                            disabled={this.state.disabled || this.state.gameOver  || this.state.cooldown[index] > 0 ? true : false}>
+                                            className={this.state.disabled || this.state.gameOver ? "disabled-button" : null}
+                                            disabled={this.state.disabled || this.state.gameOver  ? true : false}>
                                             {this.state.selectedChar.name === char.name ? "deselect" : "attack!"}
                                         </button>
                                         <button 
                                             onClick={(e) => this.specialAttackGood(char, index)}
                                             className={this.state.selectedChar.name === char.name || this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? "disabled-button" : null}
                                             disabled={this.state.selectedChar.name === char.name  || this.state.disabled || this.state.gameOver || this.state.cooldown[index] > 0 ? true : false}>
-                                            special attack
+                                            {this.state.cooldown[index] > 0 ? this.state.cooldown[index] : "special attack"}
                                         </button>
                                     </div>
 
                                     <div className="char-sprite">
                                         <img src={char.imageurl} placeholder={char.name} onClick={(e) => this.handleSelection(char)} alt={char.name}/>
-                                        { this.state.cooldown[index] > 0 ?
-                                            <h1 className="on-cooldown">{this.state.cooldown[index]}</h1>
-                                        :
-                                            <h1></h1>
-                                        }
                                     </div>
                                     <div className="special-attack-container">
                                         <div className="gradient1">
@@ -473,4 +482,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo})(LevelOne);
+export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint})(LevelOne);

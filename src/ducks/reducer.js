@@ -18,6 +18,7 @@ const SELECTED_CHAR = "SELECTED_CHAR";
 const SWITCH_CHARACTERS = "SWITCH_CHARACTERS";
 const GET_USER = 'GET_USER';
 const GET_SPECIALS = "GET_SPECIALS";
+const UPDATE_STORY = "UPDATE_STORY";
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -42,6 +43,9 @@ export default function reducer(state = initialState, action) {
         case SWITCH_CHARACTERS:
             return Object.assign({}, state, { loggedIn: action.payload, selectedChar: {} })
         case UPDATE_NAME:
+            return Object.assign({}, state, { loggedIn: action.payload })
+        case UPDATE_STORY:
+            console.log("the update for the state", action.payload);
             return Object.assign({}, state, { loggedIn: action.payload })
         case GET_SPECIALS + "_PENDING":
             return Object.assign({}, state, { loading: true })
@@ -118,5 +122,17 @@ export function getSpecialAttacks(){
     return {
         type: GET_SPECIALS,
         payload: promise
+    }
+}
+
+export function updateStorypoint(user){
+    let userObj = Object.assign({}, user)
+    let levelup = userObj.storypoint++
+    const url = `/api/user/storypoint/${userObj.id}`
+    console.log(userObj, "the new user object for updating level")
+    axios.put(url, userObj).then(response => response.data);
+    return {
+        type: UPDATE_STORY,
+        payload: userObj
     }
 }

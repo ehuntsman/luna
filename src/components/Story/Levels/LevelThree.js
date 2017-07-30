@@ -6,11 +6,11 @@ import {Link} from 'react-router-dom';
 
 import {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint} from '../../../ducks/reducer';
 
-class LevelTwo extends Component {
+class LevelThree extends Component {
     constructor(props){
         super(props);
         this.state = {
-            myHealth: 550,
+            myHealth: 600,
             badHealth: 100,
             badTeam: [
                 {cooldown: 0, health: 400, level: 1, boost: 0},
@@ -20,22 +20,22 @@ class LevelTwo extends Component {
             gameOver: false,
             badChar: [
                 {
-                    id: 503,
-                    name: "Peridot",
-                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/peridot.png",
+                    id: 505,
+                    name: "Cyberman",
+                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/cyberman.png",
                     specialattackid: 6,
-                    elementid: 7,
+                    elementid: 5,
                     level: 1,
-                    elementname: "moon"
+                    elementname: "lightning"
                 },
                 {
-                    id: 504,
-                    name: "Lapis",
-                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/lapis.png",
+                    id: 506,
+                    name: "Dalek",
+                    imageurl: "https://s3-us-west-2.amazonaws.com/devschoolluna/dalek.png",
                     specialattackid: 6,
-                    elementid: 1,
+                    elementid: 6,
                     level: 1,
-                    elementname: "water"
+                    elementname: "time"
                 }
             ],
             myteam: {},
@@ -53,7 +53,7 @@ class LevelTwo extends Component {
     componentDidMount(){
         this.props.getCharacters();
         this.props.getUserInfo();
-        const myTotalHealth = 550;
+        const myTotalHealth = 600;
         let badarr = this.state.badTeam;
         const badTotalHealth = badarr.reduce( (prev, next) => prev + next.health,0);
         this.props.getSpecialAttacks();
@@ -93,7 +93,7 @@ class LevelTwo extends Component {
         }
     }
     updateLevel(user){
-        if(user.storypoint == 2){
+        if(user.storypoint == 3){
             this.props.updateStorypoint(user);
         }
     }
@@ -246,14 +246,14 @@ class LevelTwo extends Component {
             50,
             'swing'
         ).delay(2000);
-        let attackPwr = 20;
+        let attackPwr = 30;
         let myelem = randomBaddie.elementname;
         let badelem = randomGoodie.elementname;
             //element calc
             if(myelem == "water" && badelem == "fire" || myelem == "water" && badelem == "psychic" || myelem == "fire" && badelem == "shadow" || myelem == "fire" && badelem == "ghost" || myelem == "shadow" && badelem == "moon" || myelem == "shadow" && badelem == "ghost" || myelem == "light" && badelem == "shadow" || myelem == "light" && badelem == "time" || myelem == "lightning" && badelem == "water" || myelem == "lightning" && badelem == "psychic" || myelem == "time" && badelem == "fire" || myelem == "time" && badelem == "sun" || myelem == "moon" && badelem == "light" || myelem == "moon" && badelem == "lightning" || myelem == "sun" && badelem == "water" || myelem == "sun" && badelem == "moon" || myelem == "psychic" && badelem == "light" || myelem == "psychic" && badelem == "sun" || myelem == "ghost" && badelem == "lightning" || myelem == "ghost" && badelem == "time"){
-                attackPwr = 40;
+                attackPwr = 70;
             }else if(myelem == "water" && badelem == "lightning" || myelem == "water" && badelem == "moon" || myelem == "fire" && badelem == "water" || myelem == "fire" && badelem == "psychic" || myelem == "shadow" && badelem == "light" || myelem == "shadow" && badelem == "sun" || myelem == "light" && badelem == "lightning" || myelem == "light" && badelem == "sun" || myelem == "lightning" && badelem == "fire" || myelem == "lightning" && badelem == "light" || myelem == "time" && badelem == "shadow" || myelem == "time" && badelem == "ghost" || myelem == "moon" && badelem == "time" || myelem == "moon" && badelem == "ghost" || myelem == "sun" && badelem == "fire" || myelem == "sun" && badelem == "time" || myelem == "psychic" && badelem == "water" || myelem == "psychic" && badelem == "moon" || myelem == "ghost" && badelem == "shadow" || myelem == "ghost" && badelem == "psychic"){
-                attackPwr = 10;
+                attackPwr = 20;
             }
         if(this.state.myHealth - attackPwr > 0){
             this.setState({
@@ -350,14 +350,14 @@ class LevelTwo extends Component {
             }
 
             //calc health bar
-            const myTotalHealth = 550; //this is temporary, pull from db
+            const myTotalHealth = 600; //this is temporary, pull from db
             let badarr = this.state.badTeam;
             const badTotalHealth = badarr.reduce( (prev, next) => prev + next.health,0);
             let badHealthPercent = this.state.badHealth/badTotalHealth*100
             let goodHealthPercent = this.state.myHealth/myTotalHealth*100
             return (
-                <div className={this.state.gameOver ? "game-over level-current-team level-two" : "level-current-team level-two"}>
-                    <h1>level two</h1>
+                <div className={this.state.gameOver ? "game-over level-current-team level-three" : "level-current-team level-three"}>
+                    <h1>level three</h1>
                     <div className="attack-text-box">
                         <h1 id="attack-text">Select a character to start an attack</h1>
                     </div>
@@ -457,7 +457,7 @@ class LevelTwo extends Component {
             );
         }else{
             return (
-                <div className="level-current-team level-two">
+                <div className="level-current-team level-three">
                     Sign in to create a team and fight
                 </div>
             );
@@ -477,4 +477,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint})(LevelTwo);
+export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint})(LevelThree);
