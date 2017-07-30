@@ -251,7 +251,7 @@ class LevelThree extends Component {
         let badelem = randomGoodie.elementname;
             //element calc
             if(myelem == "water" && badelem == "fire" || myelem == "water" && badelem == "psychic" || myelem == "fire" && badelem == "shadow" || myelem == "fire" && badelem == "ghost" || myelem == "shadow" && badelem == "moon" || myelem == "shadow" && badelem == "ghost" || myelem == "light" && badelem == "shadow" || myelem == "light" && badelem == "time" || myelem == "lightning" && badelem == "water" || myelem == "lightning" && badelem == "psychic" || myelem == "time" && badelem == "fire" || myelem == "time" && badelem == "sun" || myelem == "moon" && badelem == "light" || myelem == "moon" && badelem == "lightning" || myelem == "sun" && badelem == "water" || myelem == "sun" && badelem == "moon" || myelem == "psychic" && badelem == "light" || myelem == "psychic" && badelem == "sun" || myelem == "ghost" && badelem == "lightning" || myelem == "ghost" && badelem == "time"){
-                attackPwr = 70;
+                attackPwr = 60;
             }else if(myelem == "water" && badelem == "lightning" || myelem == "water" && badelem == "moon" || myelem == "fire" && badelem == "water" || myelem == "fire" && badelem == "psychic" || myelem == "shadow" && badelem == "light" || myelem == "shadow" && badelem == "sun" || myelem == "light" && badelem == "lightning" || myelem == "light" && badelem == "sun" || myelem == "lightning" && badelem == "fire" || myelem == "lightning" && badelem == "light" || myelem == "time" && badelem == "shadow" || myelem == "time" && badelem == "ghost" || myelem == "moon" && badelem == "time" || myelem == "moon" && badelem == "ghost" || myelem == "sun" && badelem == "fire" || myelem == "sun" && badelem == "time" || myelem == "psychic" && badelem == "water" || myelem == "psychic" && badelem == "moon" || myelem == "ghost" && badelem == "shadow" || myelem == "ghost" && badelem == "psychic"){
                 attackPwr = 20;
             }
@@ -301,12 +301,12 @@ class LevelThree extends Component {
         );
         let myelem = this.state.selectedChar.elementname;
         let badelem = char.elementname;
-        let attackPwr = 10;
+        let attackPwr = 20;
             //element calc
             if(myelem == "water" && badelem == "fire" || myelem == "water" && badelem == "psychic" || myelem == "fire" && badelem == "shadow" || myelem == "fire" && badelem == "ghost" || myelem == "shadow" && badelem == "moon" || myelem == "shadow" && badelem == "ghost" || myelem == "light" && badelem == "shadow" || myelem == "light" && badelem == "time" || myelem == "lightning" && badelem == "water" || myelem == "lightning" && badelem == "psychic" || myelem == "time" && badelem == "fire" || myelem == "time" && badelem == "sun" || myelem == "moon" && badelem == "light" || myelem == "moon" && badelem == "lightning" || myelem == "sun" && badelem == "water" || myelem == "sun" && badelem == "moon" || myelem == "psychic" && badelem == "light" || myelem == "psychic" && badelem == "sun" || myelem == "ghost" && badelem == "lightning" || myelem == "ghost" && badelem == "time"){
-                attackPwr = 20;
+                attackPwr = 40;
             }else if(myelem == "water" && badelem == "lightning" || myelem == "water" && badelem == "moon" || myelem == "fire" && badelem == "water" || myelem == "fire" && badelem == "psychic" || myelem == "shadow" && badelem == "light" || myelem == "shadow" && badelem == "sun" || myelem == "light" && badelem == "lightning" || myelem == "light" && badelem == "sun" || myelem == "lightning" && badelem == "fire" || myelem == "lightning" && badelem == "light" || myelem == "time" && badelem == "shadow" || myelem == "time" && badelem == "ghost" || myelem == "moon" && badelem == "time" || myelem == "moon" && badelem == "ghost" || myelem == "sun" && badelem == "fire" || myelem == "sun" && badelem == "time" || myelem == "psychic" && badelem == "water" || myelem == "psychic" && badelem == "moon" || myelem == "ghost" && badelem == "shadow" || myelem == "ghost" && badelem == "psychic"){
-                attackPwr = 5;
+                attackPwr = 10;
             }
         //are they compatible?
         //calc attack power and cooldown
