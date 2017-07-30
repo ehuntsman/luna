@@ -263,7 +263,6 @@ class LevelThree extends Component {
             });
             setTimeout(this.resetText, 2000);
         }else{
-            this.updateLevel(this.props.loggedIn);
             this.setState({
                 myHealth: this.state.myHealth - attackPwr,
                 selectedChar: {},
