@@ -184,9 +184,10 @@ class LevelThree extends Component {
             }
         }
         newcd[index] = charSpecAttack.cooldown;
-        if(this.state.badHealth - charSpecAttack.baseattack > 0){
+        let lvl3spatk = charSpecAttack.baseattack + 10;
+        if(this.state.badHealth - lvl3spatk > 0){
             this.setState({
-                badHealth: this.state.badHealth - charSpecAttack.baseattack,
+                badHealth: this.state.badHealth - lvl3spatk,
                 selectedChar: {},
                 disabled: true,
                 cooldown: newcd
@@ -194,7 +195,7 @@ class LevelThree extends Component {
         }else{
             this.updateLevel(this.props.loggedIn);
             this.setState({
-                badHealth: this.state.badHealth - charSpecAttack.baseattack,
+                badHealth: this.state.badHealth - lvl3spatk,
                 gameOver: true,
                 selectedChar: {},
                 disabled: true

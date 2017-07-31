@@ -34,6 +34,27 @@ ul {
     padding: 0; }
     .main-header a:hover {
       color: #fff; }
+  .main-header .hamburger {
+    cursor: pointer;
+    outline: none;
+    z-index: 13;
+    position: absolute;
+    right: 10px; }
+  .main-header .small-menu {
+    z-index: 11;
+    width: 100%;
+    background: rgba(147, 119, 165, 0.9);
+    position: absolute;
+    top: 40px; }
+    .main-header .small-menu ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      list-style-image: none; }
+      .main-header .small-menu ul li {
+        display: block;
+        padding: 15px 0 15px 0;
+        border-bottom: #312B56 1px solid; }
 
 .button-spacer {
   height: 27px;
@@ -60,6 +81,18 @@ button {
 .disabled {
   cursor: default; }
 
+@media screen and (max-width: 644px) {
+  .small {
+    display: block; }
+  .large {
+    display: none; } }
+
+@media screen and (min-width: 645px) {
+  .small {
+    display: none; }
+  .large {
+    display: block; } }
+
 .home-page {
   text-align: center;
   background: #373B3E;
@@ -68,22 +101,24 @@ button {
   height: 100vh; }
 
 .home-logo {
-  max-height: 45vh; }
+  max-height: 45vh;
+  max-width: 60vw; }
 
 .home-container {
-  position: relative;
   z-index: 2;
   position: absolute;
   top: 10vh;
-  left: 25vw;
-  right: 25vw; }
+  left: 20vw;
+  right: 20vw; }
   .home-container .home-links button {
     background: url("./components/Home/bluebutton.png");
+    background-position: center;
     border: none;
-    width: 241px;
+    width: 60vw;
+    max-width: 241px;
     height: 50px;
     color: white;
-    padding: 10px 30px;
+    padding: 10px 0;
     font-family: 'IM Fell French Canon', serif;
     font-size: 16px;
     cursor: pointer; }
@@ -304,10 +339,11 @@ button {
     border-radius: 10px;
     display: inline-block;
     vertical-align: top;
-    margin: 5px -7px; }
+    margin: 5px -7px;
+    width: 20vw; }
     .edit-team-container .member img {
-      width: 160px;
-      margin: 0 20px; }
+      width: 17vw;
+      margin: 0 auto; }
     .edit-team-container .member h4 {
       font-family: 'Arima Madurai', sans-serif;
       color: white;
@@ -319,7 +355,7 @@ button {
       width: 160px;
       font-weight: lighter; }
     .edit-team-container .member .level-element {
-      margin-bottom: -30px;
+      margin-bottom: -17px;
       position: relative;
       z-index: 2; }
     .edit-team-container .member .level {
@@ -342,8 +378,7 @@ button {
       height: 30px;
       vertical-align: bottom;
       border-radius: 0;
-      border: none;
-      margin-right: -74px; }
+      border: none; }
 
 .not-logged-edit {
   height: 100vh; }

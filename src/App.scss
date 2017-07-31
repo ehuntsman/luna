@@ -48,6 +48,9 @@
     position: relative;
     margin-bottom: -40px;
     z-index: 5;
+    .small {
+
+    }
     li {
       list-style-type: none;
       display: inline-block;
@@ -60,6 +63,31 @@
       padding: 0;
       &:hover {
         color: #fff;
+      }
+    }
+    .hamburger{
+      cursor:pointer;
+      outline:none;
+      z-index:13;
+      position: absolute;
+      right: 10px;
+    }
+    .small-menu {
+      z-index: 11;
+      width: 100%;
+      background: rgba($purple, 0.9);
+      position: absolute;
+      top: 40px;
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        list-style-image: none;
+        li {
+          display: block;
+          padding: 15px 0 15px 0;
+          border-bottom: $darkpurple 1px solid;
+        }
       }
     }
   }
@@ -89,6 +117,23 @@
     cursor: default;
   }
 
+  @media screen and (max-width: 644px){
+    .small {
+      display: block;
+    }
+    .large {
+      display: none;
+    }
+  }
+  @media screen and (min-width: 645px){
+    .small {
+      display: none;
+    }
+    .large {
+      display: block;
+    }
+  }
+
 
 // /////////////////////////////////////////////////////////////////
 // Home
@@ -104,23 +149,25 @@
 
   .home-logo {
     max-height: 45vh;
+    max-width: 60vw;
   }
 
   .home-container {
-    position: relative;
     z-index: 2;
     position: absolute;
     top: 10vh;
-    left: 25vw;
-    right: 25vw;
+    left: 20vw;
+    right: 20vw;
     .home-links {
       button {
         background: url('./components/Home/bluebutton.png');
+        background-position: center;
         border: none;
-        width: 241px;
+        width: 60vw;
+        max-width: 241px;
         height: 50px;
         color: white;
-        padding: 10px 30px;
+        padding: 10px 0;
         font-family: 'IM Fell French Canon', serif;
         font-size: 16px;
         cursor: pointer;
@@ -389,9 +436,10 @@
       display: inline-block;
       vertical-align: top;
       margin: 5px -7px;
+      width: 20vw;
       img {
-        width: 160px;
-        margin: 0 20px;
+        width: 17vw;
+        margin: 0 auto;
       }
       h4 {
         font-family: 'Arima Madurai', sans-serif;
@@ -405,7 +453,7 @@
         font-weight: lighter;
       }
       .level-element {
-        margin-bottom: -30px;
+        margin-bottom: -17px;
         position: relative;
         z-index: 2;
       }
@@ -432,7 +480,6 @@
         vertical-align: bottom;
         border-radius: 0;
         border: none;
-        margin-right: -74px;
       }
     }
   }

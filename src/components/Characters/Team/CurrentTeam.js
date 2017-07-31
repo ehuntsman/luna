@@ -26,13 +26,10 @@ class CurrentTeam extends Component {
                 return (
                     <div className="member" key={i}>
                         <div className="level-element">
-                            <div className="level">
-                                <p>level</p>
-                            </div>
                             <img className="element-icon" src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${character.elementname}.png`} alt="element"/>
                         </div>
                         <img src={character.framed} alt={character.name} />
-                        <h4>{character.name}</h4>
+                        <h4 className="large">{character.name}</h4>
                         {
                             this.props.selectedChar.id
                         ?

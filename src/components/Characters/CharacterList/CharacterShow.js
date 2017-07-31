@@ -14,8 +14,9 @@ class CharacterShow extends Component {
             <div className="character-show-container">
                 <img src={this.props.selectedChar.imageurl} placeholder={this.props.selectedChar.name} alt={this.props.selectedChar.name} />
                 <div className="character-show-text">
-                    <h1 className={this.props.selectedChar.color}>{this.props.selectedChar.name}</h1>
-                    <p>Special Attack: {this.props.selectedChar.specialattackid}</p>
+                    <h1 className={this.props.selectedChar.color}>
+                        {this.props.selectedChar.name}
+                    </h1>
                     <img src={`https://s3-us-west-2.amazonaws.com/devschoolluna/${this.props.selectedChar.elementname}.png`} alt={this.props.selectedChar.elementname}/>
                     <p>{this.props.selectedChar.description}</p>
                     <Link to='/myteam'>back to my team</Link>
