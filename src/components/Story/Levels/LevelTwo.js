@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import $ from 'jquery';
 import {Link} from 'react-router-dom';
 
-import {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint} from '../../../ducks/reducer';
+import {getCharacters, getUserInfo, updateStorypoint} from '../../../ducks/reducer';
 
 class LevelTwo extends Component {
     constructor(props){
@@ -56,7 +56,6 @@ class LevelTwo extends Component {
         const myTotalHealth = 550;
         let badarr = this.state.badTeam;
         const badTotalHealth = badarr.reduce( (prev, next) => prev + next.health,0);
-        this.props.getSpecialAttacks();
         if(this.props.loggedIn && this.props.loggedIn.username){
             let tempone = this.props.loggedIn.currentteam;
             let tempchararray = [];
@@ -476,4 +475,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint})(LevelTwo);
+export default connect(mapStateToProps, {getCharacters, getUserInfo, updateStorypoint})(LevelTwo);

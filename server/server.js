@@ -36,7 +36,7 @@ massive(config.connectionString).then((dbInstance) => {
         callbackURL: config.auth0Callback,
         options: {
             theme: {
-                logo: 'https://s3-us-west-2.amazonaws.com/devschoolluna/logo-01.png',
+                logo: 'https://s3-us-west-2.amazonaws.com/devschoolluna/logo.png',
                 primaryColor: '#3DA9B5',
                 authButtons: {
                     primaryColor: '#000000'

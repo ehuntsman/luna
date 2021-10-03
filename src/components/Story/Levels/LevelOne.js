@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import $ from 'jquery';
 import {Link} from 'react-router-dom';
 
-import {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint} from '../../../ducks/reducer';
+import {getCharacters, getUserInfo, updateStorypoint} from '../../../ducks/reducer';
 
 class LevelOne extends Component {
     constructor(props){
@@ -56,30 +56,20 @@ class LevelOne extends Component {
         const myTotalHealth = 500;
         let badarr = this.state.badTeam;
         const badTotalHealth = badarr.reduce( (prev, next) => prev + next.health,0);
-        this.props.getSpecialAttacks();
-        if(this.props.loggedIn && this.props.loggedIn.username){
-            let tempone = this.props.loggedIn.currentteam;
-            let tempchararray = [];
-            for(var j = 0; j < this.props.loggedIn.currentteam.length; j++){
-                for(var i = 0; i < this.props.characters.length; i++){
-                    if(this.props.characters[i].id == tempone[j]){
-                        tempchararray.push(this.props.characters[i]);
-                    }
+        let tempone = this.props.currentteam;
+        let tempchararray = [];
+        for(var j = 0; j < this.props.currentteam.length; j++){
+            for(var i = 0; i < this.props.characters.length; i++){
+                if(this.props.characters[i].id == tempone[j]){
+                    tempchararray.push(this.props.characters[i]);
                 }
             }
-            this.setState({
-                myHealth: myTotalHealth,
-                badHealth: badTotalHealth,
-                myteam: tempchararray,
-                specialAttacks: this.props.specialAttacks
-            })
-        }else{
-            this.setState({
-                myHealth: myTotalHealth,
-                badHealth: badTotalHealth,
-                specialAttacks: this.props.specialAttacks
-            })
         }
+        this.setState({
+            myHealth: myTotalHealth,
+            badHealth: badTotalHealth,
+            myteam: tempchararray,
+        })
     }
     handleSelection(character){
         if(this.state.selectedChar === character){
@@ -106,18 +96,17 @@ class LevelOne extends Component {
         })
         //api call for special attack info
         // btw, uh, special attacks attack everyone now, lol
-        let charSpecAttack = undefined;
-        let attackname = "no";
-        for(var j = 0; j < this.props.specialAttacks.length; j++){
-            if(this.props.specialAttacks[j].attackid == char.specialattackid){
-                console.log(this.props.specialAttacks[j], "weeeeeeeeeeeeeeeeeeeeeeee");
-                charSpecAttack = this.props.specialAttacks[j]
-                attackname = this.props.specialAttacks[j].name
-            }
-        }
-        console.log("this is the special attack", charSpecAttack, attackname)
+        let charSpecAttack = {baseattack: 50, cooldown: 5};
+        let attackname = char.specialattack;
+        // for(var j = 0; j < this.props.specialAttacks.length; j++){
+        //     if(this.props.specialAttacks[j].attackid == char.specialattackid){
+        //         charSpecAttack = this.props.specialAttacks[j]
+        //         attackname = this.props.specialAttacks[j].name
+        //     }
+        // }
+        // console.log("this is the special attack", charSpecAttack, attackname)
         //attack text
-        let attackText = char.name + " used " + charSpecAttack.name;
+        let attackText = char.name + " used " + attackname;
         $("#attack-text").text(attackText).delay(2000);
         //animation - needs to be cooler!!!!! Maybe swipe the card across the sceen????
         
@@ -213,9 +202,9 @@ class LevelOne extends Component {
         let randomBaddie = getRandomInt(0, this.state.badTeam.length);
         let randomGoodie = getRandomInt(0, 5);
         console.log("random goodie roll", randomGoodie)
-        console.log("this is my state team", this.state.myteam);
+        console.log("this is my state team", this.state.currentteam);
         randomBaddie = this.state.badChar[randomBaddie];
-        randomGoodie = this.state.myteam[randomGoodie];
+        randomGoodie = this.props.currentteam[randomGoodie];
         console.log("random goodie guy". randomGoodie);
 
         this.setState({
@@ -342,10 +331,11 @@ class LevelOne extends Component {
         // this.attackGood();
 }
     render() {
-        if(this.props.loggedIn && this.props.loggedIn.username){
-            let temparray = this.props.loggedIn.currentteam;
+        console.log("this is state", this.state)
+        // if(this.props.loggedIn && this.props.loggedIn.username){
+            let temparray = this.props.currentteam;
             let chararray = [];
-            for(var j = 0; j < this.props.loggedIn.currentteam.length; j++){
+            for(var j = 0; j < this.props.currentteam.length; j++){
                 for(var i = 0; i < this.props.characters.length; i++){
                     if(this.props.characters[i].id == temparray[j]){
                         chararray.push(this.props.characters[i]);
@@ -459,15 +449,16 @@ class LevelOne extends Component {
                     </div>
                 </div>
             );
-        }else{
-            return (
-                <div className="level-current-team level-one">
-                    Sign in to create a team and fight
-                </div>
-            );
+        // }else{
+        //     console.log(this.props, "************state is here")
+        //     return (
+        //         <div className="level-current-team level-one">
+        //             Sign in to create a team and fight
+        //         </div>
+        //     );
 
 
-        }
+        // }
     }
 }
 
@@ -477,8 +468,9 @@ function mapStateToProps(state){
         teamName: state.teamName,
         characters: state.characters,
         loggedIn: state.loggedIn,
-        specialAttacks: state.specialAttacks
+        specialAttacks: state.specialAttacks,
+        currentteam: state.currentteam
     }
 }
 
-export default connect(mapStateToProps, {getSpecialAttacks, getCharacters, getUserInfo, updateStorypoint})(LevelOne);
+export default connect(mapStateToProps, {getCharacters, getUserInfo, updateStorypoint})(LevelOne);
